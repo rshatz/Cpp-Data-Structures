@@ -1,0 +1,5 @@
+create an array of dynamic objects of RowAray inside Table.  See Specs RowAray.h, Table.h
+
+Fill each cell with random 2 digit integers.  The example Table has a 8 columns of RowAray objects each filled with 15 rows of random 2 digit numbers.
+
+Complete the class implementations RowAray.cpp & Table,cpp, use the driver program, obtain similar results.
