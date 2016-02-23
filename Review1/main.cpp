@@ -1,33 +1,48 @@
 #include "rowarray.h"
+#include "table.h"
 
 #include <iostream>
 #include <random>
 
+void fillRow(RowArray *rowArray, const int min, const int max);
+void displayRow(RowArray *rowArray, const int perLine);
+
 int main()
 {
     int numRows = 0;
+    int numCols = 0;
     int perLine = 5;
-    int minVal = 10;
-    int maxVal = 99;
+    int min = 10;
+    int max = 99;
 
     std::cout << "Enter the number of rows: ";
     std::cin >> numRows;
 
     RowArray rowArray(numRows);
 
-    std::random_device rd;
-    std::mt19937 mt(rd());
-    std::uniform_int_distribution<int> dist(minVal, maxVal);
+    fillRow(&rowArray, min, max);
+    displayRow(&rowArray, perLine);
+}
 
-    for(int index = 0; index < numRows; index++)
+void fillRow(RowArray *rowArray, const int min, const int max)
+{
+    std::default_random_engine engine;
+    std::uniform_int_distribution<int> dist(min, max);
+
+    for(int index = 0; index < rowArray->getSize(); index++)
     {
-        rowArray.setValue(dist(mt), index);
+        rowArray->setValue(index, dist(engine));
+    }
+}
 
-        std::cout << rowArray.getValue(index) << " ";
+void displayRow(RowArray *rowArray, const int perLine)
+{
+    for(int index = 0; index < rowArray->getSize(); index++)
+    {
+        std::cout << rowArray->getValue(index) << " ";
 
         if(index % perLine == (perLine - 1))
             std::cout << std::endl;
     }
 }
-
 

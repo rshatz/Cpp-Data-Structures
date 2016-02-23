@@ -5,19 +5,20 @@ class RowArray
 {
 public:
 
-    RowArray(const int listSize);
-    ~RowArray(){delete [] list;}
-
-    void setValue(const int value, const int index);//set a user defined value at specified index
+    RowArray(const int size);
+    ~RowArray();
 
     int getValue(const int index);
+    int getSize();
+
+    void setValue(const int index, const int value);
 
 private:
 
-    void validate(int index);//validate subscripts
+    void validate(const int index);//validate subscripts
 
     int *list;//pointer to array
-    int numOfElements;//number of elements of array
+    int listSize;//number of elements of array
 };
 
 #endif // ROWARRAY_H

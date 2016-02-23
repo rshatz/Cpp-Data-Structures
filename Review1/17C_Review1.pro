@@ -10,7 +10,9 @@ CONFIG -= app_bundle
 TEMPLATE = app
 
 SOURCES += main.cpp \
-    rowarray.cpp
+    rowarray.cpp \
+    table.cpp
 
 HEADERS += \
-    rowarray.h
+    rowarray.h \
+    table.h
