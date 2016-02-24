@@ -1,6 +1,8 @@
 #ifndef ROWARRAY_H
 #define ROWARRAY_H
 
+#include <random>
+
 class RowArray
 {
 public:

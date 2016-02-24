@@ -8,6 +8,7 @@ class Table
 public:
 
     Table(const int rows, const int cols);
+    ~Table();
 
     int getRowSize(){return numRows;}
     int getColSize(){return numCols;}

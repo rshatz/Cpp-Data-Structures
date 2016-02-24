@@ -15,9 +15,13 @@ Table::Table(const int rows, const int cols)
     }
 }
 
+Table::~Table()
+{
+    delete [] rowArray;
+}
+
 int Table::getData(const int row, const int col)
 {
     int v = rowArray[row]->getValue(col);
-    std::cout << "v";
     return v;
 }

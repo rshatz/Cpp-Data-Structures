@@ -1,14 +1,14 @@
 #include "rowarray.h"
 
 #include <iostream>
-#include <cstdlib>
 #include <random>
+
 RowArray::RowArray(const int size)
 {
-    //validate(size);//to check if listSize is negative
+    validate(size);//to check if listSize is negative
 
     listSize = size;
-    this->list = new int[size];
+    list = new int[size];
 
     std::default_random_engine engine;
     std::uniform_int_distribution<int> dist(10, 99);
@@ -18,6 +18,7 @@ RowArray::RowArray(const int size)
         list[index] = dist(engine);
     }
 }
+
 RowArray::~RowArray()
 {
     delete [] list;
@@ -39,7 +40,7 @@ int RowArray::getSize()
 
 int RowArray::getValue(int index)
 {
-    //validate(index);
+    validate(index);
     return list[index];
 }
 

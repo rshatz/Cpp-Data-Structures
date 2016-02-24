@@ -9,8 +9,8 @@ void displayCol(Table *table);
 
 int main()
 {
-    int numRows = 0;
-    int numCols = 0;
+    int numRows = 10;
+    int numCols = 10;
     int perLine = 5;
     int min = 10;
     int max = 99;
@@ -34,6 +34,7 @@ void displayRow(RowArray *rowArray, const int perLine)
         if(index % perLine == (perLine - 1))
             std::cout << std::endl;
     }
+    std::cout << std::endl;
 }
 
 void displayCol(Table *table)
@@ -44,6 +45,6 @@ void displayCol(Table *table)
         {
             std::cout << table->getData(rowIndex, colIndex) << " ";
         }
-        //std::cout << std::endl;
+        std::cout << std::endl;
     }
 }
