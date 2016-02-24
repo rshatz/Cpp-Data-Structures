@@ -9,16 +9,16 @@ public:
 
     Table(const int rows, const int cols);
 
-    int getRowSize(){return rowSize;}
-    int getColSize(){return colSize;}
+    int getRowSize(){return numRows;}
+    int getColSize(){return numCols;}
     int getData(const int row, const int col);
 
 private:
 
     RowArray **rowArray;
 
-    int rowSize;
-    int colSize;
+    int numRows;
+    int numCols;
 };
 
 #endif // TABLE_H

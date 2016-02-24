@@ -1,15 +1,23 @@
 #include "table.h"
+#include "rowarray.h"
+#include <iostream>
 
 Table::Table(const int rows, const int cols)
 {
-    rowArray = new RowArray *[rows];
+    numRows = rows;
+    numCols = cols;
 
-    for(int rowIndex = 0; rowIndex < getRowSize(); rowIndex++)
+    rowArray = new RowArray*[rows];
+
+    for(int rowIndex = 0; rowIndex < rows; rowIndex++)
     {
         rowArray[rowIndex] = new RowArray(cols);
-        for(int colIndex = 0; colIndex < getColSize(); colIndex++)
-        {
-            rowArray[rowIndex][colIndex] = 0;
-        }
     }
+}
+
+int Table::getData(const int row, const int col)
+{
+    int v = rowArray[row]->getValue(col);
+    std::cout << "v";
+    return v;
 }

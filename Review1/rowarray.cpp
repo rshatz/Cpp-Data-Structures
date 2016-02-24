@@ -2,16 +2,21 @@
 
 #include <iostream>
 #include <cstdlib>
-
+#include <random>
 RowArray::RowArray(const int size)
 {
-    validate(size);//to check if listSize is negative
+    //validate(size);//to check if listSize is negative
 
     listSize = size;
-    list = new int[size];
+    this->list = new int[size];
+
+    std::default_random_engine engine;
+    std::uniform_int_distribution<int> dist(10, 99);
 
     for(int index = 0; index < size; index++)
-        list[index] = 0;
+    {
+        list[index] = dist(engine);
+    }
 }
 RowArray::~RowArray()
 {
@@ -27,12 +32,6 @@ void RowArray::validate(const int index)
     }
 }
 
-void RowArray::setValue(const int index, const int value)
-{
-    validate(index);
-    list[index] = value;
-}
-
 int RowArray::getSize()
 {
     return listSize;
@@ -40,7 +39,7 @@ int RowArray::getSize()
 
 int RowArray::getValue(int index)
 {
-    validate(index);
+    //validate(index);
     return list[index];
 }
 

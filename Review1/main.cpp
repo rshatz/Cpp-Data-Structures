@@ -4,8 +4,8 @@
 #include <iostream>
 #include <random>
 
-void fillRow(RowArray *rowArray, const int min, const int max);
 void displayRow(RowArray *rowArray, const int perLine);
+void displayCol(Table *table);
 
 int main()
 {
@@ -19,20 +19,10 @@ int main()
     std::cin >> numRows;
 
     RowArray rowArray(numRows);
-
-    fillRow(&rowArray, min, max);
     displayRow(&rowArray, perLine);
-}
 
-void fillRow(RowArray *rowArray, const int min, const int max)
-{
-    std::default_random_engine engine;
-    std::uniform_int_distribution<int> dist(min, max);
-
-    for(int index = 0; index < rowArray->getSize(); index++)
-    {
-        rowArray->setValue(index, dist(engine));
-    }
+    Table table(numRows, numCols);
+    displayCol(&table);
 }
 
 void displayRow(RowArray *rowArray, const int perLine)
@@ -46,3 +36,14 @@ void displayRow(RowArray *rowArray, const int perLine)
     }
 }
 
+void displayCol(Table *table)
+{
+    for(int rowIndex = 0; rowIndex < table->getRowSize(); rowIndex++)
+    {
+        for(int colIndex = 0; colIndex < table->getColSize(); colIndex++)
+        {
+            std::cout << table->getData(rowIndex, colIndex) << " ";
+        }
+        //std::cout << std::endl;
+    }
+}

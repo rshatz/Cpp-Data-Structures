@@ -11,8 +11,6 @@ public:
     int getValue(const int index);
     int getSize();
 
-    void setValue(const int index, const int value);
-
 private:
 
     void validate(const int index);//validate subscripts
