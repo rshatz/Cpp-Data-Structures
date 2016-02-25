@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <random>
+#include <cstdlib>
 
 RowArray::RowArray(const int size)
 {
@@ -10,12 +11,16 @@ RowArray::RowArray(const int size)
     listSize = size;
     list = new int[size];
 
-    std::default_random_engine engine;
-    std::uniform_int_distribution<int> dist(10, 99);
+//    std::random_device rd;
+//    static std::default_random_engine engine(rd());
+//    std::uniform_int_distribution<int> dist(10, 99);
+    std::random_device rd;
+    static std::mt19937 mt(rd());
+    std::uniform_int_distribution<int> dist(0,99);
 
     for(int index = 0; index < size; index++)
     {
-        list[index] = dist(engine);
+        list[index] = dist(mt);//(rand() % 90 + 10);
     }
 }
 

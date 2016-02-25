@@ -22,6 +22,5 @@ Table::~Table()
 
 int Table::getData(const int row, const int col)
 {
-    int v = rowArray[row]->getValue(col);
-    return v;
+    return rowArray[row]->getValue(col);
 }

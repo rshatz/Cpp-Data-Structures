@@ -15,6 +15,7 @@ public:
 
 private:
 
+    static std::default_random_engine re;
     void validate(const int index);//validate subscripts
 
     int *list;//pointer to array

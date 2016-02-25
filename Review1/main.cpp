@@ -17,6 +17,8 @@ int main()
 
     std::cout << "Enter the number of rows: ";
     std::cin >> numRows;
+    std::cout << "Enter the number of columns: ";
+    std::cin >> numCols;
 
     RowArray rowArray(numRows);
     displayRow(&rowArray, perLine);
