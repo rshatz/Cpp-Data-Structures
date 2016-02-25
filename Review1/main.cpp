@@ -2,7 +2,6 @@
 #include "table.h"
 
 #include <iostream>
-#include <random>
 
 void displayRow(RowArray *rowArray, const int perLine);
 void displayCol(Table *table);
@@ -15,16 +14,13 @@ int main()
     int min = 10;
     int max = 99;
 
-    std::cout << "Enter the number of rows: ";
-    std::cin >> numRows;
-    std::cout << "Enter the number of columns: ";
-    std::cin >> numCols;
-
-    RowArray rowArray(numRows);
+    RowArray rowArray(numRows, min, max);
     displayRow(&rowArray, perLine);
 
     Table table(numRows, numCols);
     displayCol(&table);
+
+    std::cout << std::endl;
 }
 
 void displayRow(RowArray *rowArray, const int perLine)

@@ -1,6 +1,5 @@
 #include "table.h"
 #include "rowarray.h"
-#include <iostream>
 
 Table::Table(const int rows, const int cols)
 {

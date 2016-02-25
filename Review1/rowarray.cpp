@@ -2,25 +2,23 @@
 
 #include <iostream>
 #include <random>
-#include <cstdlib>
 
-RowArray::RowArray(const int size)
+RowArray::RowArray(const int rows, const int minimum, const int maximum)
 {
-    validate(size);//to check if listSize is negative
+    validateNumRows(rows);
+    static int minRange = minimum;
+    static int maxRange = maximum;
 
-    listSize = size;
-    list = new int[size];
+    listSize = rows;
+    list = new int[rows];
 
-//    std::random_device rd;
-//    static std::default_random_engine engine(rd());
-//    std::uniform_int_distribution<int> dist(10, 99);
     std::random_device rd;
     static std::mt19937 mt(rd());
-    std::uniform_int_distribution<int> dist(0,99);
+    std::uniform_int_distribution<int> dist(minRange, maxRange);
 
-    for(int index = 0; index < size; index++)
+    for(int index = 0; index < rows; index++)
     {
-        list[index] = dist(mt);//(rand() % 90 + 10);
+        list[index] = dist(mt);
     }
 }
 
@@ -29,9 +27,18 @@ RowArray::~RowArray()
     delete [] list;
 }
 
-void RowArray::validate(const int index)
+void RowArray::validateNumRows(const int numRows)
 {
-    if (index < 0 || index >= listSize)
+    if(numRows < 0)
+    {
+        std::cout << "ERROR: INVALID SUBSCRIPT";
+        exit(EXIT_FAILURE);
+    }
+}
+
+void RowArray::validateIndex(const int index)
+{
+    if(index < 0 || index >= listSize)
     {
         std::cout << "ERROR: INVALID SUBSCRIPT";
         exit(EXIT_FAILURE);
@@ -45,20 +52,6 @@ int RowArray::getSize()
 
 int RowArray::getValue(int index)
 {
-    validate(index);
+    validateIndex(index);
     return list[index];
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
