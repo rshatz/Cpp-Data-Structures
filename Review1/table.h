@@ -16,7 +16,7 @@ public:
 
 private:
 
-    RowArray **rowArray;
+    RowArray **columns;
 
     int numRows;
     int numCols;
