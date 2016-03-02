@@ -12,8 +12,13 @@ TEMPLATE = app
 SOURCES += main.cpp \
     rowarray.cpp \
     table.cpp \
+    addtable.cpp
+
 
 HEADERS += \
     rowarray.h \
     table.h \
+    absrow.h \
+    abstable.h \
+    addtable.h
 
