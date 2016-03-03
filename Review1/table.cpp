@@ -3,14 +3,14 @@
 
 Table::Table(const int rows, const int cols)
 {
-    numRows = rows;
-    numCols = cols;
+    rowSize = rows;
+    colSize = cols;
 
-    columns = new RowArray*[rows];
+    columns = new RowArray*[cols];
 
-    for(int rowIndex = 0; rowIndex < rows; rowIndex++)
+    for(int col = 0; col < cols; col++)
     {
-        columns[rowIndex] = new RowArray(cols);
+        columns[col] = new RowArray(rows);
     }
 }
 
@@ -23,7 +23,17 @@ Table::~Table()
     delete []columns;
 }
 
-int Table::getData(const int row, const int col)
+int Table::getRowSize() const
 {
-    return columns[row]->getValue(col);
+    return rowSize;
+}
+
+int Table::getColSize() const
+{
+    return colSize;
+}
+
+int Table::getData(int row, int col) const
+{
+    return columns[col]->getValue(row);
 }

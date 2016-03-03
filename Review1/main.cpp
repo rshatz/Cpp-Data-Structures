@@ -2,25 +2,28 @@
 #include "table.h"
 
 #include <iostream>
+#include <ctime>
 
 void displayRow(RowArray *rowArray, const int perLine);
 void displayCol(Table *table);
 
 int main()
 {
-    int numRows = 10;
-    int numCols = 10;
-    int perLine = 5;
-    int min = 10;
-    int max = 99;
+    srand(static_cast<unsigned int>(time(0)));
 
-    RowArray rowArray(numRows, min, max);
+    int numRows = 3;
+    int numCols = 5;
+    int perLine = 5;
+
+    RowArray rowArray(numRows);
     displayRow(&rowArray, perLine);
 
     Table table(numRows, numCols);
     displayCol(&table);
 
     std::cout << std::endl;
+
+    return 0;
 }
 
 void displayRow(RowArray *rowArray, const int perLine)

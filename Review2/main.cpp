@@ -8,13 +8,11 @@ void displayTable(Table *table);
 
 int main()
 {
-    int numRows = 10;
+    int numRows = 5;
     int numCols = 10;
     int perLine = 5;
-    int min = 10;
-    int max = 99;
 
-    RowArray rowArray(numRows, min, max);
+    RowArray rowArray(numRows);
     displayRow(&rowArray, perLine);
 
     Table table(numRows, numCols);
@@ -22,8 +20,10 @@ int main()
 
     std::cout << std::endl;
 
-    Table table2(table);
-    displayTable(&table2);
+//    Table table2(table);
+//    displayTable(&table2);
+
+    return 0;
 }
 
 void displayRow(RowArray *rowArray, const int perLine)

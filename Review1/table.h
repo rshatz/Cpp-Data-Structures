@@ -10,16 +10,16 @@ public:
     Table(const int rows, const int cols);
     virtual ~Table();
 
-    int getRowSize(){return numRows;}
-    int getColSize(){return numCols;}
-    int getData(const int row, const int col);
+    int getRowSize() const;
+    int getColSize() const;
+    int getData(int row, int col) const;
 
 private:
 
     RowArray **columns;
 
-    int numRows;
-    int numCols;
+    int rowSize;
+    int colSize;
 };
 
 #endif // TABLE_H

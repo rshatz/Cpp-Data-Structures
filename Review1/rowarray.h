@@ -5,19 +5,16 @@ class RowArray
 {
 public:
 
-    RowArray(const int rows, const int minimum = 0, const int maximum = 2147483647);
+    RowArray(const int rows);
     virtual ~RowArray();
 
-    int getValue(const int index);
-    int getSize();
+    int getValue(int index) const;
+    int getSize() const;
 
 private:
 
-    void validateIndex(const int index);//validate subscripts
-    void validateNumRows(const int numRows);
-
-    int *list;//pointer to array
-    int listSize;//number of elements of array
+    int *rowPntr;
+    int rowSize;
 };
 
 #endif // ROWARRAY_H

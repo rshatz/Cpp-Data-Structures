@@ -5,18 +5,14 @@
 
 #include "absrow.h"
 
-RowArray::RowArray(const int rows, const int minimum, const int maximum)
+RowArray::RowArray(const int rows)
 {
-    validateNumRows(rows);
-    static int minRange = minimum;
-    static int maxRange = maximum;
-
     listSize = rows;
     list = new int[rows];
 
     std::random_device rd;
     static std::mt19937 mt(rd());
-    std::uniform_int_distribution<int> dist(minRange, maxRange);
+    std::uniform_int_distribution<int> dist(10, 100);
 
     for(int index = 0; index < rows; index++)
     {
@@ -29,28 +25,6 @@ RowArray::~RowArray()
     delete [] list;
 }
 
-void RowArray::validateNumRows(const int numRows) const
-{
-    if(numRows < 0)
-    {
-        std::cout << "ERROR: INVALID SUBSCRIPT";
-        exit(EXIT_FAILURE);
-    }
-}
-
-void RowArray::validateIndex(const int index) const
-{
-    if(index < 0 || index >= listSize)
-    {
-        std::cout << "ERROR: INVALID SUBSCRIPT";
-        exit(EXIT_FAILURE);
-    }
-}
-
-void RowArray::setData(int col, int data)
-{
-
-}
 
 int RowArray::getSize() const
 {
@@ -59,6 +33,5 @@ int RowArray::getSize() const
 
 int RowArray::getData(int index) const
 {
-    validateIndex(index);
     return list[index];
 }

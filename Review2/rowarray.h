@@ -7,7 +7,7 @@ class RowArray : public AbsRow
 {
 public:
 
-    RowArray(const int rows, const int minimum = 0, const int maximum = 2147483647);
+    RowArray(const int rows);
     virtual ~RowArray();
 
     virtual int getData(int index) const final;
@@ -16,8 +16,7 @@ public:
 
 private:
 
-    void validateIndex(const int index) const;//validate subscripts
-    void validateNumRows(const int numRows) const;
+
 };
 
 #endif // ROWARRAY_H
