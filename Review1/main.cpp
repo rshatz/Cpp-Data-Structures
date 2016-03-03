@@ -11,8 +11,8 @@ int main()
 {
     srand(static_cast<unsigned int>(time(0)));
 
-    int numRows = 3;
-    int numCols = 5;
+    int numRows = 5;
+    int numCols = 3;
     int perLine = 5;
 
     RowArray rowArray(numRows);

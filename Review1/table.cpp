@@ -6,21 +6,17 @@ Table::Table(const int rows, const int cols)
     rowSize = rows;
     colSize = cols;
 
-    columns = new RowArray*[cols];
+    table = new RowArray*[rows];// set number of rows in a table
 
-    for(int col = 0; col < cols; col++)
+    for(int rowindex = 0; rowindex < rows; rowindex++)
     {
-        columns[col] = new RowArray(rows);
+        table[rowindex] = new RowArray(cols);// set number of columns in a table
     }
 }
 
 Table::~Table()
 {
-    for(int col = 0; col < getColSize(); col++)
-    {
-        delete columns[col];
-    }
-    delete []columns;
+    delete []table;
 }
 
 int Table::getRowSize() const
@@ -35,5 +31,5 @@ int Table::getColSize() const
 
 int Table::getData(int row, int col) const
 {
-    return columns[col]->getValue(row);
+    return table[row]->getValue(col);
 }

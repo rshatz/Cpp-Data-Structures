@@ -16,7 +16,7 @@ public:
 
 private:
 
-    RowArray **columns;
+    RowArray **table;
 
     int rowSize;
     int colSize;

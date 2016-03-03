@@ -10,7 +10,7 @@ RowArray::RowArray(const int rows)
 
     for(int index = 0; index < rows; index++)
     {
-        rowPntr[index] = rand()%90+10;
+        rowPntr[index] = (rand() % 90) + 10;
     }
 }
 
