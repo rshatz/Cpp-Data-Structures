@@ -29,7 +29,7 @@ Table::Table(const Table &obj)
 
         for(int colIndex = 0; colIndex < colSize; colIndex++)
         {
-            columns[rowIndex][colIndex] = 0;
+            columns[rowIndex]->setData(colIndex, obj.getData);
         }
     }
 }
@@ -41,6 +41,11 @@ Table::~Table()
         delete columns[col];
     }
     delete []columns;
+}
+
+void Table::setData(int row, int col, int data)
+{
+
 }
 
 int Table::getData(const int row, const int col) const

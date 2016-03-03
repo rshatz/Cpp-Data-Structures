@@ -9,7 +9,7 @@ public:
 
     virtual int getRowSize()const = 0;
     virtual int getColSize()const = 0;
-    virtual int getData(int,int)const = 0;
+    virtual int getData(int, int)const = 0;
 
 protected:
 

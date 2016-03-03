@@ -12,6 +12,7 @@ public:
 
     virtual int getData(int index) const final;
     virtual int getSize() const final;
+    void setData(int col, int data);
 
 private:
 

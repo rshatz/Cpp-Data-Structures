@@ -14,7 +14,7 @@ public:
     virtual int getRowSize() const final {return rowSize;}
     virtual int getColSize() const final {return colSize;}
     virtual getData(const int row, const int col) const final;
-    //virtual setData(int , int , int);
+    virtual setData(int , int , int);
 };
 
 #endif // TABLE_H

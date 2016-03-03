@@ -47,6 +47,11 @@ void RowArray::validateIndex(const int index) const
     }
 }
 
+void RowArray::setData(int col, int data)
+{
+
+}
+
 int RowArray::getSize() const
 {
     return listSize;
