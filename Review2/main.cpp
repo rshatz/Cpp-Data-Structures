@@ -4,7 +4,7 @@
 #include <iostream>
 
 void displayRow(RowArray *rowArray, const int perLine);
-void displayCol(Table *table);
+void displayTable(Table *table);
 
 int main()
 {
@@ -18,9 +18,12 @@ int main()
     displayRow(&rowArray, perLine);
 
     Table table(numRows, numCols);
-    displayCol(&table);
+    displayTable(&table);
 
     std::cout << std::endl;
+
+    Table table2(table);
+    displayTable(&table2);
 }
 
 void displayRow(RowArray *rowArray, const int perLine)
@@ -35,7 +38,7 @@ void displayRow(RowArray *rowArray, const int perLine)
     std::cout << std::endl;
 }
 
-void displayCol(Table *table)
+void displayTable(Table *table)
 {
     for(int rowIndex = 0; rowIndex < table->getRowSize(); rowIndex++)
     {

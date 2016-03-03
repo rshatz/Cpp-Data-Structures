@@ -15,8 +15,8 @@ protected:
 
     RowArray **columns;
 
-    int numRows;
-    int numCols;
+    int rowSize;
+    int colSize;
 
 };
 

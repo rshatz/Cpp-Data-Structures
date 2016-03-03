@@ -7,7 +7,7 @@ class AddTable : public Table{
 
 public:
 
-    AddTable(unsigned int r,unsigned int c):Table(r,c){}
+    AddTable(unsigned int r, unsigned int c) : Table(r, c){}
     AddTable operator+(const AddTable &);
 
 };

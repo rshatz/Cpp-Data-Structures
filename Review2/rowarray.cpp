@@ -3,6 +3,8 @@
 #include <iostream>
 #include <random>
 
+#include "absrow.h"
+
 RowArray::RowArray(const int rows, const int minimum, const int maximum)
 {
     validateNumRows(rows);
