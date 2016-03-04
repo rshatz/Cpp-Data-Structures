@@ -1,9 +1,6 @@
 #include "table.h"
 #include "rowarray.h"
 
-#include <iostream>
-using namespace std;
-
 Table::Table(const int rows, const int cols)
 {
     rowSize = rows;
@@ -17,7 +14,7 @@ Table::Table(const int rows, const int cols)
     }
 }
 
-Table::Table(Table &table)
+Table::Table(const Table &table)
 {
     this->rowSize = table.getRowSize();
     this->colSize = table.getColSize();

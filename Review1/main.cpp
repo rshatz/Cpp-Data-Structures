@@ -5,7 +5,7 @@
 #include <ctime>
 
 void displayRow(RowArray *rowArray);
-void displayCol(Table *table);
+void displayTable(Table *table);
 
 int main()
 {
@@ -18,7 +18,7 @@ int main()
     displayRow(&rowArray);
 
     Table table(numRows, numCols);
-    displayCol(&table);
+    displayTable(&table);
 
     std::cout << std::endl;
 
@@ -34,7 +34,7 @@ void displayRow(RowArray *rowArray)
     std::cout << std::endl;
 }
 
-void displayCol(Table *table)
+void displayTable(Table *table)
 {
     for(int rowIndex = 0; rowIndex < table->getRowSize(); rowIndex++)
     {

@@ -1,7 +1,5 @@
 #include "rowarray.h"
-
-#include <iostream>
-#include <random>
+#include <cstdlib>
 
 RowArray::RowArray(const int rows)
 {
