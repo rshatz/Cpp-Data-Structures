@@ -4,7 +4,7 @@
 #include <iostream>
 #include <ctime>
 
-void displayRow(RowArray *rowArray, const int perLine);
+void displayRow(RowArray *rowArray);
 void displayCol(Table *table);
 
 int main()
@@ -12,11 +12,10 @@ int main()
     srand(static_cast<unsigned int>(time(0)));
 
     int numRows = 5;
-    int numCols = 3;
-    int perLine = 5;
+    int numCols = 13;
 
     RowArray rowArray(numRows);
-    displayRow(&rowArray, perLine);
+    displayRow(&rowArray);
 
     Table table(numRows, numCols);
     displayCol(&table);
@@ -26,14 +25,11 @@ int main()
     return 0;
 }
 
-void displayRow(RowArray *rowArray, const int perLine)
+void displayRow(RowArray *rowArray)
 {
     for(int index = 0; index < rowArray->getSize(); index++)
     {
-        std::cout << rowArray->getValue(index) << " ";
-
-        if(index % perLine == (perLine - 1))
-            std::cout << std::endl;
+        std::cout << rowArray->getValue(index) << std::endl;
     }
     std::cout << std::endl;
 }

@@ -15,5 +15,5 @@ SOURCES += main.cpp \
 
 HEADERS += \
     rowarray.h \
-    table.h \
+    table.h
 

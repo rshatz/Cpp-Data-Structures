@@ -3,35 +3,33 @@
 #include <iostream>
 #include <random>
 
-#include "absrow.h"
-
 RowArray::RowArray(const int rows)
 {
-    listSize = rows;
-    list = new int[rows];
-
-    std::random_device rd;
-    static std::mt19937 mt(rd());
-    std::uniform_int_distribution<int> dist(10, 100);
+    rowSize = rows;
+    rowPntr = new int[rows];
 
     for(int index = 0; index < rows; index++)
     {
-        list[index] = dist(mt);
+        rowPntr[index] = (rand() % 90) + 10;
     }
 }
 
 RowArray::~RowArray()
 {
-    delete [] list;
+    delete [] rowPntr;
 }
 
+void RowArray::setValue(int row, int value)
+{
+    rowPntr[row] = value;
+}
 
 int RowArray::getSize() const
 {
-    return listSize;
+    return rowSize;
 }
 
-int RowArray::getData(int index) const
+int RowArray::getValue(int index) const
 {
-    return list[index];
+    return rowPntr[index];
 }

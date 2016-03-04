@@ -2,38 +2,39 @@
 #include "table.h"
 
 #include <iostream>
+#include <ctime>
 
-void displayRow(RowArray *rowArray, const int perLine);
+void displayRow(RowArray *rowArray);
 void displayTable(Table *table);
 
 int main()
 {
+    srand(static_cast<unsigned int>(time(0)));
+
     int numRows = 5;
-    int numCols = 10;
-    int perLine = 5;
+    int numCols = 13;
 
     RowArray rowArray(numRows);
-    displayRow(&rowArray, perLine);
+    displayRow(&rowArray);
 
     Table table(numRows, numCols);
     displayTable(&table);
 
-    std::cout << std::endl;
+    Table table2(table);
 
-//    Table table2(table);
-//    displayTable(&table2);
+    std::cout << std::endl;
+    displayTable(&table2);
+
+    std::cout << std::endl;
 
     return 0;
 }
 
-void displayRow(RowArray *rowArray, const int perLine)
+void displayRow(RowArray *rowArray)
 {
     for(int index = 0; index < rowArray->getSize(); index++)
     {
-        std::cout << rowArray->getData(index) << " ";
-
-        if(index % perLine == (perLine - 1))
-            std::cout << std::endl;
+        std::cout << rowArray->getValue(index) << std::endl;
     }
     std::cout << std::endl;
 }
@@ -44,7 +45,7 @@ void displayTable(Table *table)
     {
         for(int colIndex = 0; colIndex < table->getColSize(); colIndex++)
         {
-            std::cout << table->getData(rowIndex, colIndex) << " ";
+            std::cout << table->getValue(rowIndex, colIndex) << " ";
         }
         std::cout << std::endl;
     }

@@ -1,37 +1,61 @@
 #include "table.h"
 #include "rowarray.h"
 
-
 #include <iostream>
+using namespace std;
+
 Table::Table(const int rows, const int cols)
 {
     rowSize = rows;
     colSize = cols;
 
-    columns = new RowArray*[rows];
+    table = new RowArray*[rows];// set number of rows in a table
 
-    for(int rowIndex = 0; rowIndex < rows; rowIndex++)
+    for(int rowindex = 0; rowindex < rows; rowindex++)
     {
-        columns[rowIndex] = new RowArray(cols);
+        table[rowindex] = new RowArray(cols);// set number of columns in a table
     }
 }
 
+Table::Table(Table &table)
+{
+    this->rowSize = table.getRowSize();
+    this->colSize = table.getColSize();
+
+    this->table = new RowArray*[rowSize];
+
+    for(int row = 0; row < rowSize; row++)
+    {
+        this->table[row] = new RowArray(colSize);
+
+        for(int col = 0; col < colSize; col++)
+        {
+            setValue(row, col, table.getValue(row, col));
+        }
+    }
+}
 
 Table::~Table()
 {
-    for(int col = 0; col < getColSize(); col++)
-    {
-        delete columns[col];
-    }
-    delete []columns;
+    delete []table;
 }
 
-//void Table::setData(int row, int col, int data)
-//{
-
-//}
-
-int Table::getData(const int row, const int col) const
+void Table::setValue(int row, int col, int value) const
 {
-    return columns[row]->getData(col);
+    table[row]->setValue(col, value);
+}
+
+int Table::getRowSize() const
+{
+    return rowSize;
+}
+
+int Table::getColSize() const
+{
+    return colSize;
+}
+
+int Table::getValue(int row, int col) const
+{
+    return table[row]->getValue(col);
 }

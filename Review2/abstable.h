@@ -3,21 +3,20 @@
 
 #include "rowarray.h"
 
-class AbsTable{
-
+class AbsTable
+{
 public:
 
-    virtual int getRowSize()const = 0;
-    virtual int getColSize()const = 0;
-    virtual int getData(int, int)const = 0;
+    virtual int getRowSize() const = 0;
+    virtual int getColSize() const = 0;
+    virtual int getValue(int row, int col) const = 0;
 
 protected:
 
-    RowArray **columns;
+    RowArray **table;
 
     int rowSize;
     int colSize;
-
 };
 
 #endif // ABSTABLE_H

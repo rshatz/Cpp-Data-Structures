@@ -10,13 +10,10 @@ public:
     RowArray(const int rows);
     virtual ~RowArray();
 
-    virtual int getData(int index) const final;
-    virtual int getSize() const final;
-    void setData(int col, int data);
+    virtual int getValue(int index) const override;
+    virtual int getSize() const override;
 
-private:
-
-
+    void setValue(int row, int value);
 };
 
 #endif // ROWARRAY_H
