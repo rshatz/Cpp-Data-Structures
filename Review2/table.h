@@ -16,6 +16,7 @@ public:
     virtual int getValue(int row, int col) const override;
 
     void setValue(int row, int col, int value) const;
+
 };
 
 #endif // TABLE_H

@@ -1,11 +1,11 @@
-#include "rowarray.h"
-#include "table.h"
+#include "addtable.h"
 
-#include <iostream>
+#include <cstdlib>
 #include <ctime>
+#include <iostream>
+#include <iomanip>
 
-void displayRow(RowArray *rowArray);
-void displayTable(Table *table);
+void displayTable(Table &table);
 
 int main()
 {
@@ -14,38 +14,32 @@ int main()
     int numRows = 5;
     int numCols = 13;
 
-    RowArray rowArray(numRows);
-    displayRow(&rowArray);
+    AddTable table1(numRows, numCols);
+    AddTable table2(table1);
+    AddTable table3 = table1 + table2;
 
-    Table table(numRows, numCols);
-    displayTable(&table);
+    // Print the tables
 
-    Table table2(table);
+    std::cout << "Abstracted and Polymorphic Print Table 1 size is [row,col] = ["
+            << numRows << "," << numCols <<"]";
+    displayTable(table1);
+    std::cout << "Copy Constructed Table 2 size is [row,col] = ["
+            << numRows << "," << numCols <<"]";
+    displayTable(table2);
+    std::cout << "Operator Overloaded Table 3 size is [row,col] = ["
+            << numRows << "," << numCols <<"]";
+    displayTable(table3);
 
-    std::cout << std::endl;
-    displayTable(&table2);
-
-    std::cout << std::endl;
-
+    //Exit Stage Right
     return 0;
 }
 
-void displayRow(RowArray *rowArray)
+void displayTable(Table &table)
 {
-    for(int index = 0; index < rowArray->getSize(); index++)
-    {
-        std::cout << rowArray->getValue(index) << std::endl;
-    }
     std::cout << std::endl;
-}
-
-void displayTable(Table *table)
-{
-    for(int rowIndex = 0; rowIndex < table->getRowSize(); rowIndex++)
-    {
-        for(int colIndex = 0; colIndex < table->getColSize(); colIndex++)
-        {
-            std::cout << table->getValue(rowIndex, colIndex) << " ";
+    for(int row=0;row<table.getRowSize();row++){
+        for(int col=0;col<table.getColSize();col++){
+            std::cout<<std::setw(4)<<table.getValue(row,col);
         }
         std::cout << std::endl;
     }
