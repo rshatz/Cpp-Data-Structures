@@ -1,7 +1,7 @@
 #ifndef ABSROW_H
 #define ABSROW_H
 
-template <class T>
+template <typename T>
 class AbsRow
 {
 public:
@@ -9,7 +9,7 @@ public:
     virtual int getSize()const = 0;
     virtual T getValue(int index)const = 0;
 
-protected:
+public:
 
     T *rowPntr;
     int rowSize;
