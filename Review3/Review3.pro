@@ -16,4 +16,5 @@ HEADERS += \
     abstable.h \
     addtable.h \
     rowarray.h \
-    table.h
+    table.h \
+    simplevector.h

@@ -1,5 +1,6 @@
 
 #include "addtable.h"
+#include "simplevector.h"
 
 #include <cstdlib>
 #include <ctime>
@@ -20,6 +21,23 @@ int main()
     AddTable<float> table2(table1);
     AddTable<float> table3 = table1 + table2;
 
+    SimpleVector<int> simpleVect;
+
+    simpleVect.push_back(1);
+    simpleVect.push_back(2);
+    simpleVect.push_back(3);
+    simpleVect.push_back(4);
+    simpleVect.push_back(5);
+    simpleVect.push_back(6);
+    simpleVect.pop_back();
+    simpleVect.pop_back();
+    simpleVect.push_back(100);
+
+    for(int i = 0; i < simpleVect.size(); i++)
+    {
+        std::cout << simpleVect[i] << " ";
+    }
+
     // Print the tables
 
     std::cout << "Abstracted and Polymorphic Print Table 1 size is [row,col] = ["
@@ -39,10 +57,11 @@ int main()
 template <class T>
 void displayTable(T &table)
 {
+    std::cout << fixed << setprecision(1) << showpoint<<endl;
     std::cout << std::endl;
     for(int row=0;row<table.getRowSize();row++){
         for(int col=0;col<table.getColSize();col++){
-            std::cout<<std::setw(4)<<table.getValue(row,col);
+            std::cout<<std::setw(4)<<table.getValue(row,col) << " ";
         }
         std::cout << std::endl;
     }
