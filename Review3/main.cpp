@@ -21,7 +21,7 @@ int main()
     AddTable<float> table2(table1);
     AddTable<float> table3 = table1 + table2;
 
-    SimpleVector<int> simpleVect;
+    SimpleVector<int> simpleVect(100);
 
     simpleVect.push_back(1);
     simpleVect.push_back(2);
