@@ -3,15 +3,14 @@ QT -= gui
 
 CONFIG += c++11
 
-TARGET = test
+TARGET = Assignment_2
 CONFIG += console
 CONFIG -= app_bundle
 
 TEMPLATE = app
 
 SOURCES += main.cpp \
-    rowarray.cpp
+    simplevector.cpp
 
 HEADERS += \
-    rowarray.h \
-    absrow.h
+    simplevector.h
