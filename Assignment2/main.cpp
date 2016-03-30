@@ -7,13 +7,15 @@
 //
 
 #include <iostream>
-#include "SimpleVector.hpp"
-//
+#include "Vector.h"
+
 int main()
 {
-    SimpleVector simpleVect;
+    Vector simpleVect;
 
     simpleVect.appendNode(6);
+    simpleVect.insertNode(2);
+
     simpleVect.appendNode(8);
     simpleVect.appendNode(2);
     simpleVect.appendNode(9);
@@ -24,11 +26,16 @@ int main()
     
     std::cout << std::endl;
     
-    SimpleVector copy(simpleVect);
-    copy.appendNode(99);
+    Vector copy(simpleVect);
+    copy.displayVect();
+
+    std::cout << std::endl;
+
+    copy.appendNode(0);
     copy.insertNode(4);
     copy.insertNode(8);
+
     copy.displayVect();
+
     return 0;
-    
 }
