@@ -10,8 +10,8 @@ CONFIG -= app_bundle
 TEMPLATE = app
 
 SOURCES += main.cpp \
-    Vector.cpp
+    vector.cpp
 
 HEADERS += \
-    Vector.h \
-    node.h
+    node.h \
+    vector.h

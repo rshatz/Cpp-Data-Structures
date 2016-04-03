@@ -7,35 +7,35 @@
 //
 
 #include <iostream>
-#include "Vector.h"
+#include "vector.h"
 
 int main()
 {
-    Vector simpleVect;
+    vector v;
 
-    simpleVect.appendNode(6);
-    simpleVect.insertNode(2);
+    v.appendNode(6);
+    v.insertNode(2);
 
-    simpleVect.appendNode(8);
-    simpleVect.appendNode(2);
-    simpleVect.appendNode(9);
-    simpleVect.appendNode(1);
-    simpleVect.insertNode(7);
+    v.appendNode(8);
+    v.appendNode(2);
+    v.appendNode(9);
+    v.appendNode(1);
+    v.insertNode(7);
     
-    simpleVect.displayVect();
+    v.displayVect();
     
     std::cout << std::endl;
     
-    Vector copy(simpleVect);
+    vector copy(v);
     copy.displayVect();
 
     std::cout << std::endl;
 
-    copy.appendNode(0);
-    copy.insertNode(4);
-    copy.insertNode(8);
+    //copy.appendNode(0);
+    //copy.insertNode(4);
+    //copy.insertNode(8);
 
-    copy.displayVect();
+    //copy.displayVect();
 
     return 0;
 }

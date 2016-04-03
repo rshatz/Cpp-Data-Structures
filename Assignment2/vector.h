@@ -5,15 +5,15 @@
 
 #include "node.h"
 
-class Vector
+class vector
 {
     
 public:
     
-    Vector() : head(nullptr){}
+    vector() : head(nullptr){}
 
-    Vector(Vector const& rhs);
-    ~Vector();
+    vector(vector const& rhs);
+    ~vector();
     
     void appendNode(int const value);
     void insertNode(int const value);
@@ -22,6 +22,7 @@ public:
 private:
     
     Node *head;
+    Node *node;
     
 };
 

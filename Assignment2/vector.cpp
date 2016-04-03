@@ -6,21 +6,35 @@
 //  Copyright © 2016 ritchie. All rights reserved.
 //
 
-#include "Vector.h"
+#include "vector.h"
 #include "node.h"
 #include <iostream>
 
-Vector::Vector(Vector const& rhs) : head(nullptr){
+vector::vector(vector const& rhs) : head(nullptr){//, node(new Node(head)){
 
-    Node** tailPtr = &head;
+//    Node** tailPtr = &this->head;
+
+//    for(Node* list = rhs.head; list != nullptr; list = list->next){
+//        (*tailPtr) = new Node(*list);
+//        tailPtr = &((*tailPtr)->next);
+//    }
+
+    this->node = head;
 
     for(Node* list = rhs.head; list != nullptr; list = list->next){
-        (*tailPtr) = new Node(*list);
-        tailPtr = &((*tailPtr)->next);
+
+        node = new Node(*list);
+        std::cout << node << std::endl;
+        node = node->next;
+        //std::cout << list->value << " " ;
+        //std::cout << node << " " << list << "\n";
     }
+    node = head;
+
+
 }
 
-Vector::~Vector()
+vector::~vector()
 {
     Node *nodePtr = head;
     while(nodePtr != nullptr){
@@ -31,7 +45,7 @@ Vector::~Vector()
     }
 }
 
-void Vector::appendNode(int const value)
+void vector::appendNode(int const value)
 {  
     Node *newNode = new Node(value, nullptr);
     // If there are no nodes in the list make newNode the first node.
@@ -52,7 +66,7 @@ void Vector::appendNode(int const value)
     }
 }
 
-void Vector::insertNode(int const value)
+void vector::insertNode(int const value)
 { 
     Node *newNode = new Node(value, nullptr);
     // If there are no nodes in the list
@@ -63,9 +77,9 @@ void Vector::insertNode(int const value)
     }
     else{
 
-        // Position nodePtr at the head of list.
+        // To traverse the list. Position nodePtr at the head of list.
         Node *nodePtr = head;
-        // To hold previous node in list
+        // To point to previous node in list.
         Node *previousNode = nullptr;
         
         // Skip all nodes whose value is less than the parameter value.
@@ -87,8 +101,9 @@ void Vector::insertNode(int const value)
     }
 }
 
-void Vector::displayVect()
+void vector::displayVect()
 {
+    // To traverse the list.
     Node *nodePtr = head;
     while(nodePtr){
         
