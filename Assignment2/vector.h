@@ -15,15 +15,16 @@ public:
     vector(vector const& rhs);
     ~vector();
     
-    void appendNode(int const value);
+    vector& operator=(vector const& rhs);
+    // modifiers:
+    void push_back(int const value);
+    void pop_back();
     void insertNode(int const value);
     void displayVect();
     
 private:
     
     Node *head;
-    Node *node;
-    
 };
 
 #endif // SIMPLEVECTOR_H

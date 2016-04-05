@@ -13,29 +13,30 @@ int main()
 {
     vector v;
 
-    v.appendNode(6);
-    v.insertNode(2);
-
-    v.appendNode(8);
-    v.appendNode(2);
-    v.appendNode(9);
-    v.appendNode(1);
-    v.insertNode(7);
+    v.push_back(7);
+    v.push_back(8);
+    v.push_back(2);
+    v.push_back(9);
+    v.push_back(1);
     
     v.displayVect();
-    
-    std::cout << std::endl;
-    
-    vector copy(v);
-    copy.displayVect();
-
     std::cout << std::endl;
 
-    //copy.appendNode(0);
-    //copy.insertNode(4);
-    //copy.insertNode(8);
+    vector vc(v);
+    vc.displayVect();
+    std::cout << std::endl;
 
-    //copy.displayVect();
+    vc.pop_back();
+    vc.pop_back();
+    vc.pop_back();
 
-    return 0;
+    vc.displayVect();
+
+    std::cout << std::endl;
+    vector n;
+    n.pop_back();
+    n.pop_back();
+    n.displayVect();
+    n.push_back(9);
+    n.displayVect();
 }
