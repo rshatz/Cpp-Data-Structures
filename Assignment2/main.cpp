@@ -8,6 +8,7 @@
 
 #include <iostream>
 #include "vector.h"
+using namespace std;
 
 int main()
 {
@@ -20,23 +21,26 @@ int main()
     v.push_back(1);
     
     v.displayVect();
-    std::cout << std::endl;
+    cout << endl << v.size() << endl;
 
-    vector vc(v);
-    vc.displayVect();
-    std::cout << std::endl;
+    vector q;
+    cout << q.size() << endl;
 
-    vc.pop_back();
-    vc.pop_back();
-    vc.pop_back();
+//    vector vc(v);
+//    vc.displayVect();
+//    std::cout << std::endl;
 
-    vc.displayVect();
+//    vc.pop_back();
+//    vc.pop_back();
+//    vc.pop_back();
 
-    std::cout << std::endl;
-    vector n;
-    n.pop_back();
-    n.pop_back();
-    n.displayVect();
-    n.push_back(9);
-    n.displayVect();
+//    vc.displayVect();
+
+//    std::cout << std::endl;
+//    vector n;
+//    n.pop_back();
+//    n.pop_back();
+//    n.displayVect();
+//    n.push_back(9);
+//    n.displayVect();
 }

@@ -58,7 +58,7 @@ void vector::push_back(int const value)
     }
 }
 
-void vector::pop_back()
+void vector::pop_back() const
 {
     if(!head){
         return;
@@ -109,6 +109,17 @@ void vector::insertNode(int const value)
 //            newNode->next = nodePtr;
 //        }
 //    }
+}
+
+size_t vector::size() const
+{
+    Node* nodePtr = head;
+    size_t count = 0;
+    while(nodePtr){
+        nodePtr = nodePtr->next;
+        ++count;
+    }
+    return count;
 }
 
 void vector::displayVect()
