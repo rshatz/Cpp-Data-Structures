@@ -8,35 +8,50 @@
 
 #include <iostream>
 #include "vector.h"
+using namespace std;
 
 int main()
 {
     vector v;
 
-    v.push_back(7);
-    v.push_back(8);
-    v.push_back(2);
-    v.push_back(9);
+    // push_back inserts value at end of list
     v.push_back(1);
+    v.push_back(2);
+    v.push_back(3);
+    v.push_back(4);
+    v.push_back(5);
     
+    // display integers 1 - 5
+    cout << "v: ";
     v.displayVect();
-    std::cout << std::endl;
+    cout << endl;
 
+    // utilize vector copy constructor
     vector vc(v);
+    // now vc has the same elements as v
+    cout << "vc: ";
     vc.displayVect();
-    std::cout << std::endl;
+    cout << endl;
 
+    // pop_back deletes last element in the list
     vc.pop_back();
     vc.pop_back();
     vc.pop_back();
 
+    // vc now displays 1 - 2
+    cout << "vc: ";
     vc.displayVect();
+    cout << endl;
 
-    std::cout << std::endl;
     vector n;
-    n.pop_back();
-    n.pop_back();
+    // utilize overloaded = operator. n has same elements as vc
+    n = vc;
+    // add some more elements to n
+    n.push_back(-1);
+    n.push_back(-2);
+    n.push_back(-3);
+
+    cout << "n: ";
     n.displayVect();
-    n.push_back(9);
-    n.displayVect();
+    cout << endl;
 }
