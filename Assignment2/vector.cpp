@@ -15,6 +15,11 @@ vector::vector(vector const& rhs){
     vector::operator =(rhs);
 }
 
+vector::vector(size_t const size)
+{
+
+}
+
 vector& vector::operator =(vector const& rhs)
 {
     Node dummy;

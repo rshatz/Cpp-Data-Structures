@@ -11,6 +11,7 @@ class vector
 public:
     
     vector() : head(nullptr){}
+    vector(size_t const) : head(nullptr){}
 
     vector(vector const& rhs);
     ~vector();
