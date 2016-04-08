@@ -10,16 +10,18 @@ class vector
 {   
 public:
     // constructors
-    vector() : head(nullptr){}
+    vector() : head(nullptr) {}
     vector(size_t const sz);
     vector(vector const& rhs);
     ~vector();
 
     vector& operator=(vector const& rhs);
+
     // modifiers:
     void push_back(int const value);
     void pop_back() const;
-    void insertNode(int const value);
+    void insert(const size_t pos, int const value);
+
     // capacity
     size_t size() const;
 
