@@ -11,16 +11,17 @@ class vector
 public:
     // constructors
     vector() : head(nullptr) {}
-    vector(size_t const sz);
-    vector(vector const& rhs);
+    vector(const size_t sz);
+    vector(const vector& rhs);
     ~vector();
 
     vector& operator=(vector const& rhs);
 
     // modifiers:
-    void push_back(int const value);
+    void push_back(const int value);
     void pop_back() const;
-    void insert(const size_t pos, int const value);
+    void insert(const size_t position, const int value);
+    void erase(const size_t position);
 
     // capacity
     size_t size() const;

@@ -4,9 +4,9 @@
 struct Node
 {
     Node(): next(nullptr), value(0) {}
-    Node(int v) : value(v) {}
-    Node(Node* n, int const v) : next(n), value(v) {}
-    Node(Node* const node) : next(node->next), value(node->value) {}
+    Node(const int v) : next(nullptr), value(v) {}
+    //Node(Node* n, const int v) : next(n), value(v) {}
+    Node(const Node* node) : next(node->next), value(node->value) {}
 
     Node *next;
     int value;

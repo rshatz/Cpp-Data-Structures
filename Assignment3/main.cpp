@@ -3,14 +3,6 @@
 
 using namespace std;
 
-//void printVector(std::vector<int>& vec)
-//{
-//    for (int a : vec)
-//    {
-//        std::cout << a << " ";
-//    }
-//}
-
 int main()
 {
     vector v;
@@ -21,6 +13,7 @@ int main()
     v.push_back(4);
     v.push_back(5);
 
-    v.insert(2, 99);
+    v.insert(0, 99);
+    v.erase(1);
     v.displayVect();
 }

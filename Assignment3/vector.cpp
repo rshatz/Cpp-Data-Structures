@@ -10,11 +10,6 @@
 #include "node.h"
 #include <iostream>
 
-vector::vector(vector const& rhs)
-{
-    vector::operator =(rhs);
-}
-
 vector::vector(size_t const sz) : head(nullptr)
 {
     Node d;
@@ -26,14 +21,19 @@ vector::vector(size_t const sz) : head(nullptr)
     this->head = d.next;
 }
 
+vector::vector(vector const& rhs)
+{
+    vector::operator =(rhs);
+}
+
 vector& vector::operator =(vector const& rhs)
 {
-    Node dummy;
-    for (Node* r = rhs.head, *n = &dummy; r; r = r->next) {
+    Node d;
+    for (Node* r = rhs.head, *n = &d; r; r = r->next) {
         n->next = new Node(r);
         n = n->next;
     }
-    this->head = dummy.next;
+    this->head = d.next;
     return *this;
 }
 
@@ -49,13 +49,14 @@ vector::~vector()
 
 void vector::push_back(int const value)
 {
-    Node* newNode = new Node(nullptr, value);
+    Node* newNode = new Node(value);
     // If there are no nodes in the list make newNode the first node.
     if (head == nullptr) {
         head = newNode;
-    } else { // Otherwise, insert newNode at end.
+    // Otherwise, insert newNode at end.
+    } else {
         Node* nodePtr = head;
-        // Find the last node in the list.
+        // Go to the last node in the list.
         while (nodePtr->next) {
             nodePtr = nodePtr->next;
         }
@@ -80,30 +81,66 @@ void vector::pop_back() const
     }
 }
 
-void vector::insert(const size_t pos, const int value)
+void vector::insert(const size_t position, const int value)
 {
-    if (size() < pos) {
+    // Subscript error
+    if (position > size()) {
         return;
     }
     Node* newNode = new Node(value);
-    // If there are no nodes in the list
-    // make newNode the first node.
+    Node* nodePtr = head;
+    Node* previousNode = nullptr;
+    // If there are no nodes in the list than make newNode the first node.
     if (head == nullptr) {
         head = newNode;
-    } else {
-        // Position nodePtr at the head of list.
-        Node *nodePtr = head;
-        // To point to previous node in list.
-        Node *previousNode = nullptr;
-        // Traverse list until position (pos) is reached
-        for (size_t i = 0; i < pos; i++) {
+    // Insert at beginning of list
+    } else if (position == 0) {
+        head = newNode;
+        newNode->next = nodePtr;
+    // Otherwise insert new node at position
+    } else {      
+        // Traverse list until position is reached
+        for (size_t i = 0; i < position; i++) {
             previousNode = nodePtr;
             nodePtr = nodePtr->next;
         }
-        // Now insert new node at position (pos) with parameter value
         previousNode->next = newNode;
         newNode->next = nodePtr;
+//        // If newNode is the first in the list
+//        if (previousNode == nullptr) {
+//            head = newNode;
+//            newNode->next = nodePtr;
+//        // Otherwise insert new node at position
+//        } else {
+//            previousNode->next = newNode;
+//            newNode->next = nodePtr;
+//        }
     }
+}
+
+void vector::erase(const size_t position)
+{
+    if (size() < position || head == nullptr) {
+        return;
+    }
+    Node* nodePtr = head;
+    Node* previous = nullptr;
+    for (size_t i = 0; i < position; i++) {
+        previous = nodePtr;
+        nodePtr = nodePtr->next;
+    }
+    // Erase first element
+    if (previous == nullptr) {
+        head = nodePtr->next;
+        delete nodePtr;
+    // Otherwise erase element at position
+    } else {
+        Node* temp = nodePtr->next;
+        previous->next = temp;
+        delete nodePtr;
+    }
+
+
 }
 
 size_t vector::size() const
@@ -119,7 +156,6 @@ size_t vector::size() const
 
 void vector::displayVect()
 {
-    // To traverse the list.
     Node *nodePtr = head;
     while (nodePtr) {
         
