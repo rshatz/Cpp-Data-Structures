@@ -72,7 +72,7 @@ void vector::pop_back() const
     } else {
         Node* nodePtr = head;
         Node* previousNode = nullptr;
-        while(nodePtr->next){
+        while(nodePtr->next) {
             previousNode = nodePtr;
             nodePtr = nodePtr->next;
         }
@@ -97,7 +97,7 @@ void vector::insert(const size_t position, const int value)
     } else if (position == 0) {
         head = newNode;
         newNode->next = nodePtr;
-    // Otherwise insert new node at position
+    // Otherwise insert new node at given position
     } else {      
         // Traverse list until position is reached
         for (size_t i = 0; i < position; i++) {
@@ -106,15 +106,6 @@ void vector::insert(const size_t position, const int value)
         }
         previousNode->next = newNode;
         newNode->next = nodePtr;
-//        // If newNode is the first in the list
-//        if (previousNode == nullptr) {
-//            head = newNode;
-//            newNode->next = nodePtr;
-//        // Otherwise insert new node at position
-//        } else {
-//            previousNode->next = newNode;
-//            newNode->next = nodePtr;
-//        }
     }
 }
 
@@ -125,22 +116,22 @@ void vector::erase(const size_t position)
     }
     Node* nodePtr = head;
     Node* previous = nullptr;
-    for (size_t i = 0; i < position; i++) {
-        previous = nodePtr;
-        nodePtr = nodePtr->next;
-    }
     // Erase first element
-    if (previous == nullptr) {
+    if (position == 0) {
         head = nodePtr->next;
         delete nodePtr;
     // Otherwise erase element at position
     } else {
+        for (size_t i = 0; i < position; i++) {
+            previous = nodePtr;
+            nodePtr = nodePtr->next;
+        }
         Node* temp = nodePtr->next;
         previous->next = temp;
+        //previous->next = nodePtr->next;
+
         delete nodePtr;
     }
-
-
 }
 
 size_t vector::size() const
@@ -158,8 +149,8 @@ void vector::displayVect()
 {
     Node *nodePtr = head;
     while (nodePtr) {
-        
         std::cout << nodePtr->value << " ";
         nodePtr = nodePtr->next;
     }
+    std::cout << std::endl;
 }
