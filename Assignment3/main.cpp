@@ -1,40 +1,44 @@
 #include "vector.h"
 #include <iostream>
 
-using namespace std;
-
 int main()
 {
-    vector v1;
+    vector<std::string> vString;
 
-    v1.push_back(1);
-    v1.push_back(2);
-    v1.push_back(3);
-    v1.push_back(4);
-    v1.push_back(5);
+    vString.push_back("1.1");
+    vString.push_back("2.2");
+    vString.push_back("3.3");
+    vString.push_back("4.4");
+    vString.push_back("5.5");
 
-    v1.insert(0, 5);
-    v1.pop_back();
-    v1.displayVect();
+    vString.insert(0, "hello");
+    vString.push_back("1.1");
+    vString.push_back("2.2");
+    vString.pop_back();
+    vString.pop_back();
+    vString.erase(0);
+    vString.displayVect();
 
-    vector v2(v1);
+    vector<double> v2(10);
+    v2.insert(0, 3.33);
     v2.displayVect();
 
-    vector v3 = v2;
+    vector<double> v3(v2);
     v3.erase(0);
-    v3.insert(0, 55);
-    v3.push_back(9999);
+    v3.insert(0, 5.5);
+    v3.push_back(9.9);
     v3.displayVect();
-    cout << v3.size() << "\n";
 
-    vector v4;
+    vector<double> v4 = v3;
 
-    for (int i = 0; i < 100; i++) {
-        v4.push_back(i + 1);
-    }
-    v4.displayVect();
-    for (int i = 0; i < 99; i++) {
-        v4.erase(0);
-    }
-    v4.displayVect();
+//    v4.displayVect();
+//    for (int i = 0; i < 100; i++) {
+//        v4.push_back(i + 1);
+//    }
+//    v4.displayVect();
+//    int size = v4.size;
+//    for (int i = 0; i < size; i++) {
+//        v4.erase(0);
+//    }
+//    v4.displayVect();
 }
