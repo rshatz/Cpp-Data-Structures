@@ -17,7 +17,9 @@ public:
     vector(const vector& rhs);
     ~vector();
 
-    vector<T> &operator =(const vector& rhs);
+    // element access:
+    T at(const size_t position);
+    T operator[](const size_t position);
 
     // modifiers:
     void push_back(const T value);
@@ -25,8 +27,10 @@ public:
     void insert(const size_t position, const T value);
     void erase(const size_t position);
 
-    // capacity
+    // capacity:
     size_t size() const;
+
+    vector<T> &operator=(const vector& rhs);
 
     void displayVect();// display vector is for testing only - will be deleted
     
@@ -79,6 +83,24 @@ vector<T>::~vector()
 }
 
 template <typename T>
+T vector<T>::at(const size_t position)
+{
+    if (size() < position || head == nullptr) {// proper error should be thrown fix this nasty
+        return 0;
+    }
+    Node<T>* nodePtr = head;
+    for (size_t i = 0; i < position; i++) {
+        nodePtr = nodePtr->next;
+    }
+    return nodePtr->value;
+}
+
+template <typename T>
+T vector<T>::operator[](const size_t position) {
+    return at(position);
+}
+
+template <typename T>
 void vector<T>::push_back(T const value)
 {
     Node<T>* newNode = new Node<T>(value);
@@ -121,7 +143,7 @@ template <typename T>
 void vector<T>::insert(const size_t position, const T value)
 {
     // Subscript error
-    if (position > size()) {
+    if (position > size()) {// rewrite throw proper error
         return;
     }
     Node<T>* newNode = new Node<T>(value);
@@ -149,7 +171,7 @@ void vector<T>::insert(const size_t position, const T value)
 template <typename T>
 void vector<T>::erase(const size_t position)
 {
-    if (size() < position || head == nullptr) {
+    if (size() < position || head == nullptr) {// rewrite throw proper error
         return;
     }
     Node<T>* nodePtr = head;

@@ -12,6 +12,9 @@ TEMPLATE = app
 SOURCES += main.cpp \
     vector.cpp
 
+
 HEADERS += \
     node.h \
     vector.h
+
+
