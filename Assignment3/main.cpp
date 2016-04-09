@@ -33,7 +33,7 @@ int main()
         v4.push_back(i + 1);
     }
     v4.displayVect();
-    for (int i = 0; i < 100; i++) {
+    for (int i = 0; i < 99; i++) {
         v4.erase(0);
     }
     v4.displayVect();

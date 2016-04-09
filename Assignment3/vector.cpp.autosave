@@ -2,7 +2,7 @@
 //  SimpleVector.cpp
 //  Assignment2
 //
-//  Created by ritchie on 3/24/16.
+//  Created by ritchie shatz on 3/24/16.
 //  Copyright © 2016 ritchie. All rights reserved.
 //
 
@@ -126,10 +126,7 @@ void vector::erase(const size_t position)
             previousNode = nodePtr;
             nodePtr = nodePtr->next;
         }
-//        Node* temp = nodePtr->next;
-//        previousNode->next = temp;
         previousNode->next = nodePtr->next;
-
         delete nodePtr;
     }
 }
