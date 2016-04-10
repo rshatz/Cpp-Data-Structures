@@ -1,7 +1,7 @@
 
 // SimpleVector class template
-#ifndef SIMPLEVECTOR_H
-#define SIMPLEVECTOR_H
+#ifndef VECTOR_H
+#define VECTOR_H
 
 #include "node.h"
 #include <cstddef>
@@ -12,10 +12,12 @@ class vector
 {   
 public:
     // constructors
-    vector() : head(nullptr) {}
-    vector(const size_t sz);
+    vector() : head(nullptr), sz(0) {}
+    vector(const size_t s);
     vector(const vector& rhs);
     ~vector();
+
+    vector<T>& operator=(const vector& rhs);
 
     // element access:
     T at(const size_t position);
@@ -28,21 +30,20 @@ public:
     void erase(const size_t position);
 
     // capacity:
-    size_t size() const;
+    size_t size() const {return sz;}
 
-    vector<T> &operator=(const vector& rhs);
-
-    void displayVect();// display vector is for testing only - will be deleted
-    
 private:
     
+    void subError(); // Handles memory subscripts out of range
+
     Node<T> *head;
+    size_t sz;
 };
 
 // Class implementation
 
 template <typename T>
-vector<T>::vector(size_t const sz) : head(nullptr)
+vector<T>::vector(size_t const s) : head(nullptr), sz(s)
 {
     Node<T> d;
     Node<T>* nodePtr = &d;
@@ -60,8 +61,9 @@ vector<T>::vector(const vector& rhs)
 }
 
 template <typename T>
-vector<T>& vector<T>::operator =(const vector& rhs)
+vector<T>& vector<T>::operator=(const vector& rhs)
 {
+    sz = rhs.sz;
     Node<T> d;
     for (Node<T>* r = rhs.head, *n = &d; r; r = r->next) {
         n->next = new Node<T>(r);
@@ -85,12 +87,14 @@ vector<T>::~vector()
 template <typename T>
 T vector<T>::at(const size_t position)
 {
-    if (size() < position || head == nullptr) {// proper error should be thrown fix this nasty
-        return 0;
-    }
     Node<T>* nodePtr = head;
-    for (size_t i = 0; i < position; i++) {
-        nodePtr = nodePtr->next;
+    if (position < 0 || position >= this->size()) {
+        subError();
+    } else {
+
+        for (size_t i = 0; i < position; i++) {
+            nodePtr = nodePtr->next;
+        }
     }
     return nodePtr->value;
 }
@@ -101,7 +105,7 @@ T vector<T>::operator[](const size_t position) {
 }
 
 template <typename T>
-void vector<T>::push_back(T const value)
+void vector<T>::push_back(const T value)
 {
     Node<T>* newNode = new Node<T>(value);
     // If there are no nodes in the list make newNode the first node.
@@ -117,6 +121,7 @@ void vector<T>::push_back(T const value)
         // Insert newNode as the last node.
         nodePtr->next = newNode;
     }
+    ++sz;
 }
 
 template <typename T>
@@ -127,29 +132,33 @@ void vector<T>::pop_back()
     } else if (!head->next) {
         delete head;
         head = nullptr;
+        sz = 0;
     } else {
+
         Node<T>* nodePtr = head;
         Node<T>* previousNode = nullptr;
-        while(nodePtr->next) {
+
+        while (nodePtr->next) {
             previousNode = nodePtr;
             nodePtr = nodePtr->next;
         }
         previousNode->next = nullptr;
         delete nodePtr;
+        --sz;
     }
 }
 
 template <typename T>
 void vector<T>::insert(const size_t position, const T value)
 {
-    // Subscript error
-    if (position > size()) {// rewrite throw proper error
-        return;
+    if (position > sz) {
+        subError();
     }
+
     Node<T>* newNode = new Node<T>(value);
     Node<T>* nodePtr = head;
     Node<T>* previousNode = nullptr;
-    // If there are no nodes in the list than make newNode the first node.
+
     if (head == nullptr) {
         head = newNode;
     // Insert at beginning of list
@@ -158,7 +167,6 @@ void vector<T>::insert(const size_t position, const T value)
         newNode->next = nodePtr;
     // Otherwise insert new node at given position
     } else {
-        // Traverse list until position is reached
         for (size_t i = 0; i < position; i++) {
             previousNode = nodePtr;
             nodePtr = nodePtr->next;
@@ -166,13 +174,14 @@ void vector<T>::insert(const size_t position, const T value)
         previousNode->next = newNode;
         newNode->next = nodePtr;
     }
+    ++sz;
 }
 
 template <typename T>
 void vector<T>::erase(const size_t position)
 {
-    if (size() < position || head == nullptr) {// rewrite throw proper error
-        return;
+    if (sz <= position || head == nullptr) {
+        subError();
     }
     Node<T>* nodePtr = head;
     Node<T>* previousNode = nullptr;
@@ -189,29 +198,13 @@ void vector<T>::erase(const size_t position)
         previousNode->next = nodePtr->next;
         delete nodePtr;
     }
+    --sz;
 }
 
 template <typename T>
-size_t vector<T>::size() const
-{
-    Node<T>* nodePtr = head;
-    size_t count = 0;
-    while (nodePtr) {
-        nodePtr = nodePtr->next;
-        ++count;
-    }
-    return count;
+void vector<T>::subError() {
+    std::cout << "ERROR: Subscript out of range.\n";
+        exit(EXIT_FAILURE);
 }
 
-template <typename T>
-void vector<T>::displayVect()
-{
-    Node<T>* nodePtr = head;
-    while (nodePtr) {
-        std::cout << nodePtr->value << " ";
-        nodePtr = nodePtr->next;
-    }
-    std::cout << std::endl;
-}
-
-#endif // SIMPLEVECTOR_H
+#endif // VECTOR_H

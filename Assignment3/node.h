@@ -5,7 +5,7 @@ template <typename T>
 struct Node
 {
     Node(): next(nullptr), value(0) {}
-    Node(const T v) : next(nullptr), value(v) {}
+    Node(const T val) : next(nullptr), value(val) {}
     Node(const Node<T>* node) : next(node->next), value(node->value) {}
 
     Node<T> *next;

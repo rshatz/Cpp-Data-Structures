@@ -4,53 +4,40 @@
 template <typename T>
 void print(vector<T>& vec)
 {
-    int size = vec.size();
-    for (int i = 0; i < size; i++) {
+    for (size_t i = 0; i < vec.size(); i++) {
         std::cout << vec[i] << " ";
     }
+    std::cout << "\n";
 }
 
 int main()
 {
-    vector<std::string> v;
+    vector<std::string> vs;
 
-    v.push_back("1.1");
-    v.push_back("2.2");
-    v.push_back("3.3");
-    v.push_back("4.4");
-    v.push_back("5.5");
-    v.push_back("6.7");
+    vs.push_back("0.0");
+    vs.push_back("1.1");
+    vs.push_back("2.2");
+    vs.push_back("3.3");
+    vs.push_back("4.4");
+    vs.push_back("5.5");
+    vs.push_back("6.6");
 
-//    vString.insert(0, "hello");
-//    vString.push_back("1.1");
-//    vString.push_back("2.2");
-//    vString.pop_back();
-//    vString.pop_back();
+    vs.erase(0);
 
-    print(v);
+    vs.insert(4, "||");
+    print(vs);
 
-//    vector<double> v2(2);
-//    v2.insert(0, 3.33);
-//    //print(v2);
-//    v2.displayVect();
+    //vector<std::string> vsc;
+    //vsc = vs;
 
-//    vector<double> v3(v2);
-//    v3.erase(0);
-//    v3.insert(0, 5.5);
-//    v3.push_back(9.9);
-//    //v3.displayVect();
+    //print(vsc);
 
-//    vector<double> v4 = v3;
+    vector<double> vd(25);
 
-//    //v4.displayVect();
-//    for (int i = 0; i < 100; i++) {
-//        v4.push_back(i + 1);
-//    }
-//    //v4.displayVect();
-//    int size = v4.size();
-//    for (int i = 0; i < size; i++) {
-//        v4.erase(0);
-//    }
-//    v4.push_back(100);
-    //v4.displayVect();
+    for (size_t i = 0; i < vd.size(); i++) {
+        vd.erase(i);
+        vd.insert(i, i * 1.01);
+    }
+    print(vd);
+    vector<double> vdc(vd);
 }
