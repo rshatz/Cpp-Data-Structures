@@ -3,38 +3,64 @@
 #ifndef VECTOR_H
 #define VECTOR_H
 
-#include "node.h"
+//#include "node.h"
 #include <cstddef>
 #include <iostream>
 
 template <typename T>
-class vector
+class List
 {   
 public:
     // constructors
-    vector() : head(nullptr), sz(0) {}
-    vector(const size_t s);
-    vector(const vector& rhs);
-    ~vector();
+    List()
+        : head(nullptr)
+        , sz(0) {}
+    List(const size_t s);
+    List(const List& rhs);
+    ~List();
 
-    vector<T>& operator=(const vector& rhs);
+    List<T>& operator=(const List& rhs);
 
     // element access:
-    T at(const size_t position);
-    T operator[](const size_t position);
+    const T& at(const size_t position) const;
+    const T& operator[](const size_t position) const;
 
     // modifiers:
-    void push_back(const T value);
+    void push_back(const T& value);
     void pop_back();
-    void insert(const size_t position, const T value);
+    void insert(const size_t position, const T& value);
     void erase(const size_t position);
 
     // capacity:
     size_t size() const {return sz;}
 
 private:
-    
-    void subError(); // Handles memory subscripts out of range
+
+    template <typename U>
+    struct Node
+    {
+        Node()
+           : link(nullptr)
+           , value(0) {}
+
+        Node(const U val)
+            : link(nullptr)
+            , value(val) {}
+
+        Node(const Node<U>* node)
+            : link(node->link)
+            , value(node->value) {}
+
+        Node(const Node<U>* lnk, U& val) // continue working on this
+            : link(lnk)
+            , value(val) {}
+
+        Node<U> *link;
+        U value;
+    };
+
+    void subError() const; // Handles memory subscripts out of range
+    void swap(List<T>& other);
 
     Node<T> *head;
     size_t sz;
@@ -43,49 +69,62 @@ private:
 // Class implementation
 
 template <typename T>
-vector<T>::vector(size_t const s) : head(nullptr), sz(s)
+List<T>::List(const size_t s)
+    : head(nullptr)
+    , sz(s)
 {
     Node<T> d;
     Node<T>* nodePtr = &d;
     for (size_t i = 0; i < sz; i++) {
-        nodePtr->next = new Node<T>;
-        nodePtr = nodePtr->next;
+        nodePtr->link = new Node<T>;
+        nodePtr = nodePtr->link;
     }
-    this->head = d.next;
+    this->head = d.link;
+
 }
 
 template <typename T>
-vector<T>::vector(const vector& rhs)
+List<T>::List(const List& rhs)
+    : head(nullptr)
+    , sz(0)
 {
-    vector::operator =(rhs);
-}
+    Node<T>** current = &head;
 
-template <typename T>
-vector<T>& vector<T>::operator=(const vector& rhs)
-{
-    sz = rhs.sz;
-    Node<T> d;
-    for (Node<T>* r = rhs.head, *n = &d; r; r = r->next) {
-        n->next = new Node<T>(r);
-        n = n->next;
+    for(Node<T>* loop = rhs.head; loop; loop = loop->link) {
+        (*current) = new Node<T>(loop->value);
+        current    = &(*current)->link;
+        ++sz;
     }
-    this->head = d.next;
-    return *this;
 }
 
 template <typename T>
-vector<T>::~vector()
+List<T>& List<T>::operator=(const List& rhs)
+{
+    List<T>  tmp(rhs);  // Copy
+    tmp.swap(*this);    // Swap
+    return *this;       // return
+}
+
+template <typename T>
+void List<T>::swap(List<T>& other)
+{
+    using std::swap;
+    swap(head, other.head);
+    swap(sz, other.sz);
+}
+template <typename T>
+List<T>::~List()
 {
     Node<T>* nodePtr = head;
     while (nodePtr != nullptr) {
-        Node<T>* nextNode = nodePtr->next;
+        Node<T>* nextNode = nodePtr->link;
         delete nodePtr;
         nodePtr = nextNode;
     }
 }
 
 template <typename T>
-T vector<T>::at(const size_t position)
+const T& List<T>::at(const size_t position) const
 {
     Node<T>* nodePtr = head;
     if (position < 0 || position >= this->size()) {
@@ -93,19 +132,19 @@ T vector<T>::at(const size_t position)
     } else {
 
         for (size_t i = 0; i < position; i++) {
-            nodePtr = nodePtr->next;
+            nodePtr = nodePtr->link;
         }
     }
     return nodePtr->value;
 }
 
 template <typename T>
-T vector<T>::operator[](const size_t position) {
+const T& List<T>::operator[](const size_t position) const{
     return at(position);
 }
 
 template <typename T>
-void vector<T>::push_back(const T value)
+void List<T>::push_back(const T& value)
 {
     Node<T>* newNode = new Node<T>(value);
     // If there are no nodes in the list make newNode the first node.
@@ -115,21 +154,21 @@ void vector<T>::push_back(const T value)
     } else {
         Node<T>* nodePtr = head;
         // Go to the last node in the list.
-        while (nodePtr->next) {
-            nodePtr = nodePtr->next;
+        while (nodePtr->link) {
+            nodePtr = nodePtr->link;
         }
         // Insert newNode as the last node.
-        nodePtr->next = newNode;
+        nodePtr->link = newNode;
     }
     ++sz;
 }
 
 template <typename T>
-void vector<T>::pop_back()
+void List<T>::pop_back()
 {
     if (!head) {
         return;
-    } else if (!head->next) {
+    } else if (!head->link) {
         delete head;
         head = nullptr;
         sz = 0;
@@ -138,18 +177,18 @@ void vector<T>::pop_back()
         Node<T>* nodePtr = head;
         Node<T>* previousNode = nullptr;
 
-        while (nodePtr->next) {
+        while (nodePtr->link) {
             previousNode = nodePtr;
-            nodePtr = nodePtr->next;
+            nodePtr = nodePtr->link;
         }
-        previousNode->next = nullptr;
+        previousNode->link = nullptr;
         delete nodePtr;
         --sz;
     }
 }
 
 template <typename T>
-void vector<T>::insert(const size_t position, const T value)
+void List<T>::insert(const size_t position, const T& value)
 {
     if (position > sz) {
         subError();
@@ -164,21 +203,21 @@ void vector<T>::insert(const size_t position, const T value)
     // Insert at beginning of list
     } else if (position == 0) {
         head = newNode;
-        newNode->next = nodePtr;
+        newNode->link = nodePtr;
     // Otherwise insert new node at given position
     } else {
         for (size_t i = 0; i < position; i++) {
             previousNode = nodePtr;
-            nodePtr = nodePtr->next;
+            nodePtr = nodePtr->link;
         }
-        previousNode->next = newNode;
-        newNode->next = nodePtr;
+        previousNode->link = newNode;
+        newNode->link = nodePtr;
     }
     ++sz;
 }
 
 template <typename T>
-void vector<T>::erase(const size_t position)
+void List<T>::erase(const size_t position)
 {
     if (sz <= position || head == nullptr) {
         subError();
@@ -187,22 +226,22 @@ void vector<T>::erase(const size_t position)
     Node<T>* previousNode = nullptr;
     // Erase first element
     if (position == 0) {
-        head = nodePtr->next;
+        head = nodePtr->link;
         delete nodePtr;
     // Otherwise erase element at position
     } else {
         for (size_t i = 0; i < position; i++) {
             previousNode = nodePtr;
-            nodePtr = nodePtr->next;
+            nodePtr = nodePtr->link;
         }
-        previousNode->next = nodePtr->next;
+        previousNode->link = nodePtr->link;
         delete nodePtr;
     }
     --sz;
 }
 
 template <typename T>
-void vector<T>::subError() {
+void List<T>::subError() const {
     std::cout << "ERROR: Subscript out of range.\n";
         exit(EXIT_FAILURE);
 }

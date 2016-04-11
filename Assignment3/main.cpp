@@ -2,7 +2,7 @@
 #include <iostream>
 
 template <typename T>
-void print(vector<T>& vec)
+void print(List<T>& vec)
 {
     for (size_t i = 0; i < vec.size(); i++) {
         std::cout << vec[i] << " ";
@@ -12,32 +12,43 @@ void print(vector<T>& vec)
 
 int main()
 {
-    vector<std::string> vs;
+    List<std::string> stringVect;
 
-    vs.push_back("0.0");
-    vs.push_back("1.1");
-    vs.push_back("2.2");
-    vs.push_back("3.3");
-    vs.push_back("4.4");
-    vs.push_back("5.5");
-    vs.push_back("6.6");
+    stringVect.push_back("0.0");
+    stringVect.push_back("1.1");
+    stringVect.push_back("2.2");
+    stringVect.push_back("3.3");
+    stringVect.push_back("4.4");
+    stringVect.push_back("5.5");
+    stringVect.push_back("6.6");
+    stringVect.push_back("7.7");
 
-    vs.erase(0);
+    stringVect.erase(0);
 
-    vs.insert(4, "||");
-    print(vs);
+    stringVect.insert(4, "||");
+    print(stringVect);
 
-    //vector<std::string> vsc;
-    //vsc = vs;
+    List<double> dblVect(10);
 
-    //print(vsc);
-
-    vector<double> vd(25);
-
-    for (size_t i = 0; i < vd.size(); i++) {
-        vd.erase(i);
-        vd.insert(i, i * 1.01);
+    for (size_t i = 0; i < dblVect.size(); i++) {
+        dblVect.erase(i);
+        dblVect.insert(i, (i + 1) * 1.01);
     }
-    print(vd);
-    vector<double> vdc(vd);
+    print(dblVect);
+    List<int> intVect(10);
+
+    intVect.insert(5, 5);
+    intVect.insert(0, 1);
+    print(intVect);
+
+    List<int> copy(intVect);
+
+    copy.push_back(17);
+    copy.insert(0, 1);
+    copy.erase(0);
+    print(copy);
+
+    List<int> assignment;
+    assignment = copy;
+    print(assignment);
 }
