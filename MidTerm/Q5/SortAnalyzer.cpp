@@ -1,11 +1,12 @@
 #include "SortAnalyzer.h"
 
 #include <iostream>
+#include <ctime>
 
 int SortAnalyzer::linearSearch(const int data[], const int length, const int key)
 {
     clear();
-    begin = clock();
+    clock_t begin = clock();
     for (unsigned i = 0; i < loopCount; i++) {
 
         eq++;  // i = 0
@@ -21,8 +22,8 @@ int SortAnalyzer::linearSearch(const int data[], const int length, const int key
             inc++; // i++
         }
     }
-    end = clock();
-    elapsed = double(end - begin) / CLOCKS_PER_SEC;
+    clock_t end = clock();
+    elapsedTime = double(end - begin) / CLOCKS_PER_SEC;
 
     return -1; // failure
 }
@@ -30,7 +31,7 @@ int SortAnalyzer::linearSearch(const int data[], const int length, const int key
 int SortAnalyzer::binarySearch(const int arr[], int length, const int key)
 {
     clear();
-    begin = clock();
+    clock_t begin = clock();
     for (unsigned i = 0; i < loopCount; i++) {
 
         int low = 0;
@@ -62,8 +63,8 @@ int SortAnalyzer::binarySearch(const int arr[], int length, const int key)
             }
         }
     }
-    end = clock();
-    elapsed = double(end - begin) / CLOCKS_PER_SEC;
+    clock_t end = clock();
+    elapsedTime = double(end - begin) / CLOCKS_PER_SEC;
 
     return -1; // failure:
 }
@@ -74,5 +75,5 @@ void SortAnalyzer::display()
               << "\nNumber of increments: " << inc
               << "\nNumber of comparisons: " << com
               << "\nC Total: " << eq + inc + com
-              << "\nTime: " << elapsed << "\n\n";
+              << "\nTime: " << elapsedTime << "\n\n";
 }

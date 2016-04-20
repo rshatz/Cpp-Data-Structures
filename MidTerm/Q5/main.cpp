@@ -1,10 +1,5 @@
 #include "SortAnalyzer.h"
 
-#include <iostream>
-#include <ctime>
-
-using namespace std;
-
 int* fillArray(const int arrSize)
 {
     int* arr = new int[arrSize];
@@ -21,7 +16,7 @@ int main()
 
     int* arr = fillArray(size);
 
-    SortAnalyzer sa(100000000);
+    SortAnalyzer sa(10000000);
 
     sa.linearSearch(arr, size, key);
     sa.display();
