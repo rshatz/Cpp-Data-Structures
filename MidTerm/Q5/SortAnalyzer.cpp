@@ -3,9 +3,25 @@
 #include <iostream>
 #include <ctime>
 
-int SortAnalyzer::linearSearch(const int data[], const int length, const int key)
+SortAnalyzer::SortAnalyzer(const int data[], const int length, const int key)
+    : length(length)
+    , key(key)
+    , eq(0)
+    , com(0)
+    , inc(0)
+    , loopCount(0)
+    , elapsedTime(0)
+{
+    array = new int[length];
+    for (int i = 0; i < length; i++) {
+        array[i] = data[i];
+    }
+}
+
+int SortAnalyzer::linearSearch(const unsigned lc)
 {
     clear();
+    loopCount = lc;
     clock_t begin = clock();
     for (unsigned i = 0; i < loopCount; i++) {
 
@@ -15,9 +31,9 @@ int SortAnalyzer::linearSearch(const int data[], const int length, const int key
             com++; // i < length
             com++; // val == data[i]
 
-            if (key == data[i]) {
+            if (key == array[i]) {
 
-                return data[i]; // success
+                return array[i]; // success
             }
             inc++; // i++
         }
@@ -28,9 +44,11 @@ int SortAnalyzer::linearSearch(const int data[], const int length, const int key
     return -1; // failure
 }
 
-int SortAnalyzer::binarySearch(const int arr[], int length, const int key)
+int SortAnalyzer::binarySearch(const unsigned lc)
 {
     clear();
+    loopCount = lc;
+
     clock_t begin = clock();
     for (unsigned i = 0; i < loopCount; i++) {
 
@@ -45,13 +63,13 @@ int SortAnalyzer::binarySearch(const int arr[], int length, const int key)
             mid = static_cast<int>((low + high)/2);
             eq++;  // mid = mid = (low + high)/2
 
-            if (key < arr[mid]) {
+            if (key < array[mid]) {
                 com++; // key < arr[mid]
 
                 high = mid - 1;
                 eq++;  // high = mid -1
             }
-            else if (arr[mid] < key) {
+            else if (array[mid] < key) {
                 com += 2; // arr[mid] < key
 
                 low = mid + 1;
@@ -59,7 +77,7 @@ int SortAnalyzer::binarySearch(const int arr[], int length, const int key)
             }
             else {
                 com += 2;
-                return arr[mid]; // success
+                return array[mid]; // success
             }
         }
     }
@@ -71,9 +89,10 @@ int SortAnalyzer::binarySearch(const int arr[], int length, const int key)
 
 void SortAnalyzer::display()
 {
-    std::cout << "Number of equalities: " << eq
+    std::cout << "Loop Count: " << loopCount
+              << "\nNumber of equalities: " << eq
               << "\nNumber of increments: " << inc
-              << "\nNumber of comparisons: " << com
+              << "\nNumber of comparisons: " << com          
               << "\nC Total: " << eq + inc + com
               << "\nTime: " << elapsedTime << "\n\n";
 }

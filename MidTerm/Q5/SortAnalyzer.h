@@ -5,15 +5,10 @@ class SortAnalyzer
 {
 public:
 
-    SortAnalyzer(const unsigned lc)
-        : eq(0)
-        , com(0)
-        , inc(0)
-        , elapsedTime(0)
-        , loopCount(lc){}
+    SortAnalyzer(const int data[], const int length, const int key);
 
-    int linearSearch(const int data[], const int length, const int key);
-    int binarySearch(const int data[], const int length, const int key);
+    int linearSearch(const unsigned lc);
+    int binarySearch(const unsigned lc);
 
     void display(); // show results
 
@@ -21,11 +16,14 @@ private:
 
     void clear() {eq = 0; com = 0; inc = 0; elapsedTime = 0;} // must reset values for next analysis
 
+    int *array;
+    int length;
+    int key;
     unsigned eq;    // number of assignments
     unsigned com;   // number of comparisons
     unsigned inc;   // number of increments
-    double elapsedTime;
     unsigned loopCount;
+    double elapsedTime;
 };
 
 #endif // SORT_H
