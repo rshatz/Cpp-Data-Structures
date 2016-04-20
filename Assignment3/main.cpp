@@ -50,5 +50,6 @@ int main()
 
     List<int> assignment;
     assignment = copy;
+    std::cout << "= copy: ";
     print(assignment);
 }

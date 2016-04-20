@@ -80,7 +80,6 @@ List<T>::List(const size_t s)
         nodePtr = nodePtr->link;
     }
     this->head = d.link;
-
 }
 
 template <typename T>
