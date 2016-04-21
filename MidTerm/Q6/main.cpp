@@ -4,52 +4,72 @@
 #include <ctime>
 #include <cmath>
 
-int* fillArray(const int arrSize)
+void fillArray(int arr[], const int arrSize)
 {
-    int* arr = new int[arrSize];
     for (int i = 0; i < arrSize; i++) {
         arr[i] = rand() % arrSize;
     }
-    return arr;
+}
+
+void print(int arr[], const int arrSize)
+{
+    std::cout << "---------\n";
+    for (int i = 0; i < arrSize; i++) {
+        std::cout << arr[i] << "\n";
+    }
 }
 
 int main()
 { 
     srand(static_cast<unsigned int>(time(0)));
 
-    int size = 300;
-    int key = size + 1; // set key to worst case which is when the element is not in the list
-    int* arr = fillArray(size);
-
-    Analyzer a(arr, size, key);
-    a.selectionSort(arr, size);
+    Analyzer a;
 
     // Selection Sort
-    std::cout << "Selection Sort Results:\n\n";
+    std::cout << "-----------------------\n"
+              << "Selection Sort Results:\n"
+              << "-----------------------\n";
+
+    int sortSize = 5000;
+    for (int i = 0; i < 4; i++) {
+
+        int* sortArr = new int[sortSize];
+
+        fillArray(sortArr, sortSize);
+        a.selectionSort(sortArr, sortSize);
+        a.display();
+
+        sortSize *= 2;
+        delete[] sortArr;
+    }
 
     // Linear Search
-    std::cout << "Linear Search Results:\n\n";
+    std::cout << "-----------------------\n"
+              << "Linear Search Results:\n"
+              << "-----------------------\n";
 
-    int p = 4;
+    int size = 300;
+    int key = size + 1; // set key to worst case which is when the element is not in the list
+    int* arr = new int[size];
+
+    int expo = 4;
     for (int i = 0; i < 4; i++) {
-        a.linearSearch(pow(10, p));
+        a.setLoopCount(pow(10, expo));
+        a.linearSearch(arr, size, key);
         a.display();
-        p++;
+        expo++;
     }
 
     // Binary Search
-    std::cout << "Binary Search Results:\n\n";
+    std::cout << "-----------------------\n"
+              << "Binary Search Results:\n"
+              << "-----------------------\n";
 
-    p = 4;
+    expo = 4;
     for (int i = 0; i < 4; i++) {
-        a.binarySearch(pow(10, p));
+        a.setLoopCount(pow(10, expo));
+        a.binarySearch(arr, size, key);
         a.display();
-        p++;
+        expo++;
     }
 }
-
-
-
-
-
-
