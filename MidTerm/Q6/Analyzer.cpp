@@ -3,6 +3,40 @@
 #include <iostream>
 #include <ctime>
 
+int Analyzer::linearSearch(int data[], const int length, const int key)
+{
+    clear(); // reset values to 0
+
+    clock_t begin = clock();
+    // this for loop not part of linear search
+    for (int loop = 0; loop < loopCount; loop++) {
+
+   /***************************************
+    * Linear Search algorithm starts here *
+    ***************************************/
+        selectionSort(data, length);
+        eq++;  // i = 0
+        for (int i = 0; i < length; i++) {
+
+            com++; // i < length
+            com++; // val == data[i]
+
+            if (key == data[i]) {
+
+                return data[i]; // success
+            }
+            inc++; // i++
+        }
+   /***************************************
+    *  Linear Search algorithm ends here  *
+    ***************************************/
+    }
+    clock_t end = clock();
+    elapsedTime = double(end - begin) / CLOCKS_PER_SEC;
+
+    return -1; // failure
+}
+
 void Analyzer::selectionSort(int data[], const int length)
 {
     clock_t begin = clock();
@@ -26,39 +60,14 @@ void Analyzer::selectionSort(int data[], const int length)
     elapsedTime = double(end - begin) / CLOCKS_PER_SEC;
 }
 
-int Analyzer::linearSearch(const int data[], const int length, const int key)
-{
-    clear(); // reset values to 0
-
-    clock_t begin = clock();
-    for (int loop = 0; loop < loopCount; loop++) {// for loop not part of linear search
-
-        eq++;  // i = 0
-        for (int i = 0; i < length; i++) { // begin linear search
-
-            com++; // i < length
-            com++; // val == data[i]
-
-            if (key == data[i]) {
-
-                return data[i]; // success
-            }
-            inc++; // i++
-        }
-    }
-    clock_t end = clock();
-    elapsedTime = double(end - begin) / CLOCKS_PER_SEC;
-
-    return -1; // failure
-}
-
-int Analyzer::binarySearch(const int data[], const int length, const int key)
+int Analyzer::binarySearch(int data[], const int length, const int key)
 {
     clear(); // reset values to 0
 
     clock_t begin = clock();
     for (int i = 0; i < loopCount; i++) {
 
+        this->selectionSort(data, length);
         int low = 0;
         int mid = 0;
         int high = length;

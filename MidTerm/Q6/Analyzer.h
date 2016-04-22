@@ -13,11 +13,15 @@ public:
       , elapsedTime(0)
       , loopCount(0) {}
 
-    int linearSearch(const int data[], const int length, const int key);
-    int binarySearch(const int data[], const int length, const int key);
+    int linearSearch(int data[], const int length, const int key);
+    int binarySearch(int data[], const int length, const int key);
     void selectionSort(int data[], const int length);
 
-    void setLoopCount(int lc) {loopCount = lc;}
+//    int linearAnalyzer(const int data[], const int length, const int key);
+//    int binaryAnalyzer(const int data[], const int length, const int key);
+//    void selectionAnalyzer(int data[], const int length);
+
+    void setLoopCount(const int lc) {loopCount = lc;}
     void display(); // show results
 
 private:
