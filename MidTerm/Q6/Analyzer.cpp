@@ -6,33 +6,25 @@
 int Analyzer::linearSearch(int data[], const int length, const int key)
 {
     clear(); // reset values to 0
+    arraySize = length;
 
     clock_t begin = clock();
-    // this for loop not part of linear search
-    for (int loop = 0; loop < loopCount; loop++) {
+    //selectionSort(data, length);
 
-   /***************************************
-    * Linear Search algorithm starts here *
-    ***************************************/
-        selectionSort(data, length);
-        eq++;  // i = 0
-        for (int i = 0; i < length; i++) {
+    eq++;  // i = 0
+    for (int i = 0; i < length; i++) {
 
-            com++; // i < length
-            com++; // val == data[i]
+        checks++;
+        com++; // i < length
+        com++; // val == data[i]
 
-            if (key == data[i]) {
-
-                return data[i]; // success
-            }
-            inc++; // i++
+        if (key == data[i]) {
+            return data[i]; // success
         }
-   /***************************************
-    *  Linear Search algorithm ends here  *
-    ***************************************/
+        inc++; // i++
     }
     clock_t end = clock();
-    elapsedTime = double(end - begin) / CLOCKS_PER_SEC;
+    elapsedTime = double(end - begin) / (CLOCKS_PER_SEC * 1000);
 
     return -1; // failure
 }
@@ -63,38 +55,36 @@ void Analyzer::selectionSort(int data[], const int length)
 int Analyzer::binarySearch(int data[], const int length, const int key)
 {
     clear(); // reset values to 0
+    arraySize = length;
 
     clock_t begin = clock();
-    for (int i = 0; i < loopCount; i++) {
+    //selectionSort(data, length);
 
-        this->selectionSort(data, length);
-        int low = 0;
-        int mid = 0;
-        int high = length;
+    int low = 0;
+    int mid = 0;
+    int high = length;
 
-        while (low <= high) {
+    while (low <= high) {
+        checks++;
+        com++; // low <= high
 
-            com++; // low <= high
+        mid = static_cast<int>((low + high)/2);
+        eq++;  // mid = mid = (low + high)/2
 
-            mid = static_cast<int>((low + high)/2);
-            eq++;  // mid = mid = (low + high)/2
+        if (key < data[mid]) {
+            com++; // key < arr[mid]
+            high = mid - 1;
+            eq++;  // high = mid -1
+        }
+        else if (data[mid] < key) {
+            com += 2; // arr[mid] < key
 
-            if (key < data[mid]) {
-                com++; // key < arr[mid]
-
-                high = mid - 1;
-                eq++;  // high = mid -1
-            }
-            else if (data[mid] < key) {
-                com += 2; // arr[mid] < key
-
-                low = mid + 1;
-                eq++;  // low = mid + 1
-            }
-            else {
-                com += 2;
-                return data[mid]; // success
-            }
+            low = mid + 1;
+            eq++;  // low = mid + 1
+        }
+        else {
+            com += 2;
+            return data[mid]; // success
         }
     }
     clock_t end = clock();
@@ -105,7 +95,8 @@ int Analyzer::binarySearch(int data[], const int length, const int key)
 
 void Analyzer::display()
 {
-    std::cout << "Loop Count: " << loopCount
+    std::cout << "Checks: " << checks
+              << "\nArray Size: " << arraySize
               << "\nNumber of equalities: " << eq
               << "\nNumber of increments: " << inc
               << "\nNumber of comparisons: " << com
