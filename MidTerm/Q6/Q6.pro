@@ -13,4 +13,6 @@ SOURCES += main.cpp \
     Analyzer.cpp
 
 HEADERS += \
-    Analyzer.h
+    Analyzer.h \
+    OptimizedVector.h \
+    SimpleVector.h
