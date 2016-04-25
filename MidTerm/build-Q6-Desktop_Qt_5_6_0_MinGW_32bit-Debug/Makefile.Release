@@ -51,7 +51,7 @@ OBJECTS       = release/main.o \
 DIST          =  ..\Q6\Analyzer.h \
 		..\Q6\OptimizedVector.h \
 		..\Q6\SimpleVector.h \
-		..\Q6\listvector.h ..\Q6\main.cpp \
+		..\Q6\ListVector.h ..\Q6\main.cpp \
 		..\Q6\Analyzer.cpp
 QMAKE_TARGET  = Q6
 DESTDIR        = release\ #avoid trailing-slash linebreak
@@ -107,7 +107,8 @@ compiler_clean:
 
 ####### Compile
 
-release/main.o: ../Q6/main.cpp ../Q6/Analyzer.h
+release/main.o: ../Q6/main.cpp ../Q6/Analyzer.h \
+		../Q6/ListVector.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\main.o ..\Q6\main.cpp
 
 release/Analyzer.o: ../Q6/Analyzer.cpp ../Q6/Analyzer.h

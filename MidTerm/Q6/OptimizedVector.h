@@ -59,7 +59,7 @@ private:
     void subError() const; // Handles memory subscripts out of range
     void swap(OptimizedVector<T>& other);
 
-    Node<T> *head;
+    Node<T>* head;
     size_t sz;
 };
 

@@ -16,4 +16,4 @@ HEADERS += \
     Analyzer.h \
     OptimizedVector.h \
     SimpleVector.h \
-    listvector.h
+    ListVector.h
