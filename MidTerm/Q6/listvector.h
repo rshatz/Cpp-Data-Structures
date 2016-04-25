@@ -1,22 +1,22 @@
-#ifndef LINKEDVECTOR_H
-#define LINKEDVECTOR_H
+#ifndef LISTVECTOR_H
+#define LISTVECTOR_H
 
 #include <cstddef>
 #include <iostream>
 
 template <typename T>
-class OptimizedVector
+class ListVector
 {
 public:
     // constructors
-    OptimizedVector()
+    ListVector()
         : head(nullptr)
         , sz(0) {}
-    OptimizedVector(const size_t s);
-    OptimizedVector(const OptimizedVector& rhs);
-    ~OptimizedVector();
+    ListVector(const size_t s);
+    ListVector(const ListVector& rhs);
+    ~ListVector();
 
-    OptimizedVector<T>& operator=(const OptimizedVector& rhs);
+    ListVector<T>& operator=(const ListVector& rhs);
 
     // element access:
     const T& at(const size_t position) const;
@@ -57,7 +57,7 @@ private:
     };
 
     void subError() const; // Handles memory subscripts out of range
-    void swap(OptimizedVector<T>& other);
+    void swap(ListVector<T>& other);
 
     Node<T> *head;
     size_t sz;
@@ -66,7 +66,7 @@ private:
 // Class implementation
 
 template <typename T>
-OptimizedVector<T>::OptimizedVector(const size_t s)
+ListVector<T>::ListVector(const size_t s)
     : head(nullptr)
     , sz(s)
 {
@@ -80,7 +80,7 @@ OptimizedVector<T>::OptimizedVector(const size_t s)
 }
 
 template <typename T>
-OptimizedVector<T>::OptimizedVector(const OptimizedVector& rhs)
+ListVector<T>::ListVector(const ListVector& rhs)
     : head(nullptr)
     , sz(0)
 {
@@ -94,22 +94,22 @@ OptimizedVector<T>::OptimizedVector(const OptimizedVector& rhs)
 }
 
 template <typename T>
-OptimizedVector<T>& OptimizedVector<T>::operator=(const OptimizedVector& rhs)
+ListVector<T>& ListVector<T>::operator=(const ListVector& rhs)
 {
-    OptimizedVector<T>  tmp(rhs);  // Copy
+    ListVector<T>  tmp(rhs);  // Copy
     tmp.swap(*this);    // Swap
     return *this;       // return
 }
 
 template <typename T>
-void OptimizedVector<T>::swap(OptimizedVector<T>& other)
+void ListVector<T>::swap(ListVector<T>& other)
 {
     using std::swap;
     swap(head, other.head);
     swap(sz, other.sz);
 }
 template <typename T>
-OptimizedVector<T>::~OptimizedVector()
+ListVector<T>::~ListVector()
 {
     Node<T>* nodePtr = head;
     while (nodePtr != nullptr) {
@@ -120,7 +120,7 @@ OptimizedVector<T>::~OptimizedVector()
 }
 
 template <typename T>
-const T& OptimizedVector<T>::at(const size_t position) const
+const T& ListVector<T>::at(const size_t position) const
 {
     Node<T>* nodePtr = head;
     if (position < 0 || position >= this->size()) {
@@ -135,12 +135,12 @@ const T& OptimizedVector<T>::at(const size_t position) const
 }
 
 template <typename T>
-const T& OptimizedVector<T>::operator[](const size_t position) const{
+const T& ListVector<T>::operator[](const size_t position) const{
     return at(position);
 }
 
 template <typename T>
-void OptimizedVector<T>::push_back(const T& value)
+void ListVector<T>::push_back(const T& value)
 {
     Node<T>* newNode = new Node<T>(value);
     // If there are no nodes in the list make newNode the first node.
@@ -160,7 +160,7 @@ void OptimizedVector<T>::push_back(const T& value)
 }
 
 template <typename T>
-void OptimizedVector<T>::pop_back()
+void ListVector<T>::pop_back()
 {
     if (!head) {
         return;
@@ -184,7 +184,7 @@ void OptimizedVector<T>::pop_back()
 }
 
 template <typename T>
-void OptimizedVector<T>::insert(const size_t position, const T& value)
+void ListVector<T>::insert(const size_t position, const T& value)
 {
     if (position > sz) {
         subError();
@@ -213,7 +213,7 @@ void OptimizedVector<T>::insert(const size_t position, const T& value)
 }
 
 template <typename T>
-void OptimizedVector<T>::erase(const size_t position)
+void ListVector<T>::erase(const size_t position)
 {
     if (sz <= position || head == nullptr) {
         subError();
@@ -237,8 +237,8 @@ void OptimizedVector<T>::erase(const size_t position)
 }
 
 template <typename T>
-void OptimizedVector<T>::subError() const {
+void ListVector<T>::subError() const {
     std::cout << "ERROR: Subscript out of range.\n";
         exit(EXIT_FAILURE);
 }
-#endif // LINKEDVECTOR_H
+#endif // LISTVECTOR_H

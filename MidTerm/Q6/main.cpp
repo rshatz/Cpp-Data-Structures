@@ -1,4 +1,5 @@
 #include "Analyzer.h"
+#include "listvector.h"
 
 #include <iostream>
 #include <ctime>
@@ -24,6 +25,8 @@ int main()
     srand(static_cast<unsigned int>(time(0)));
 
     Analyzer a;
+    ListVector<int> lv;
+    lv.push_back(12);
 
     int size = 50000;
     int key = -1; // key is set to not be in list. This is to test for worst case

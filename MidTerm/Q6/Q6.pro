@@ -15,4 +15,5 @@ SOURCES += main.cpp \
 HEADERS += \
     Analyzer.h \
     OptimizedVector.h \
-    SimpleVector.h
+    SimpleVector.h \
+    listvector.h
