@@ -27,18 +27,23 @@ private:
     struct Link {
 
         Link()
-            : prev(nullptr)
-            , next(nullptr)
-            , value(0) {}
+            : value(0)
+            , prev(nullptr)
+            , next(nullptr) {}
 
         Link(Elem value)
-            : prev(nullptr)
-            , next(nullptr)
-            , value(value) {}
+            : value(value)
+            , prev(nullptr)
+            , next(nullptr) {}
 
+        Link(Elem value, Link* prev, Link* next)
+            : value(value)
+            , prev(prev)
+            , next(next) {}
+
+        Elem value; // the value
         Link* prev; // previous link
         Link* next; // successor (next) link
-        Elem value; // the value
     };
 
     void subError() const; // Handles memory subscripts out of range
@@ -53,7 +58,6 @@ template<typename T>
 void ListVector<T>::sorted_push(const T &v)
 {
     Link<T>* newNode = new Link<T>(v);
-    Link<T>* nodePtr = first;
     sz++;
 
     if(!first) {
@@ -61,6 +65,7 @@ void ListVector<T>::sorted_push(const T &v)
         std::cout << newNode->value << " \n";
     } else {
 
+        Link<T>* nodePtr = first;
         while (nodePtr != nullptr && nodePtr->value < v) {
             nodePtr = nodePtr->next;
         }
