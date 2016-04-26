@@ -26,7 +26,7 @@ int main()
     ListVector<int> lv;
 
     for (int i = 1; i < 20; i++) {
-        lv.sorted_push(i);
+        lv.sorted_push(rand());
     }
 
     lv.sorted_push(4);
