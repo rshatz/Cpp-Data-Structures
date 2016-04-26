@@ -22,23 +22,21 @@ void print(int arr[], const int arrSize)
 
 int main()
 { 
-
+    srand(static_cast<unsigned int>(time(0)));
     ListVector<int> lv;
 
-    lv.push_front(1);
-    lv.push_front(2);
-    lv.push_front(3);
-    lv.push_back(1);
-    lv.push_back(2);
-    lv.push_back(3);
-
-    for (int i = 0; i < lv.size(); i++) {
-        std::cout << lv.at(i) << "\n";
+    for (int i = 1; i < 20; i++) {
+        lv.sorted_push(i);
     }
 
+    lv.sorted_push(4);
+    lv.sorted_push(2);
+    lv.sorted_push(1);
+    lv.sorted_push(5);
 
-
-//    srand(static_cast<unsigned int>(time(0)));
+//    for (int i = 0; i < lv.size(); i++) {
+//        std::cout << lv.at(i) << "\n";
+//    }
 
 //    Analyzer a;
 

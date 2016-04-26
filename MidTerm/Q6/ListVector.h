@@ -13,6 +13,8 @@ public:
         , last(nullptr)
         , sz(0) {}
 
+    void sorted_push(const T& v);
+
     void push_back(const T& v);  // insert v at end
     void push_front(const T& v); // insert v at front
 
@@ -48,15 +50,38 @@ private:
 };
 
 template<typename T>
-void ListVector<T>::push_front(const T &v)
+void ListVector<T>::sorted_push(const T &v)
 {
     Link<T>* newNode = new Link<T>(v);
+    Link<T>* nodePtr = first;
     sz++;
-    if (first) {
-        newNode->next = first;
+
+
+    if(!first) {
         first = newNode;
+        std::cout << nodePtr << " " << first->value <<  "\n";
+
     } else {
-        first = last = newNode;
+
+        while (newNode->value > nodePtr->value && nodePtr->next) {
+            std::cout << "!" << "\n";
+            //nodePtr->prev = nodePtr;
+            nodePtr = nodePtr->next;
+        }
+        if (nodePtr) { // nodePtr did not reach end of the list
+            //nodePtr->prev = newNode;
+            //newNode = nodePtr->prev->next;
+            //std::cout << nodePtr->next;
+//            nodePtr->prev = newNode;
+//            newNode->prev = nodePtr->prev;
+//            newNode->next = nodePtr;
+
+        } else { // nodePtr reached the end of the list
+
+            nodePtr->next = newNode;
+            newNode->prev = nodePtr;
+            last = newNode;
+        }
     }
 }
 
@@ -70,6 +95,19 @@ void ListVector<T>::push_back(const T &v)
         last->next = newNode; // The node currently last in the list now points to the new node,
         last = newNode;       // The new node now is pointed to by last. New node is at the end of the list.
     } else {                  // Else there are 0 nodes in the list. The new node is now the first in the list.
+        first = last = newNode;
+    }
+}
+
+template<typename T>
+void ListVector<T>::push_front(const T &v)
+{
+    Link<T>* newNode = new Link<T>(v);
+    sz++;
+    if (first) {
+        newNode->next = first;
+        first = newNode;
+    } else {
         first = last = newNode;
     }
 }
