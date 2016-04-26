@@ -25,9 +25,9 @@ int main()
     srand(static_cast<unsigned int>(time(0)));
     ListVector<int> lv;
 
-    for (int i = 1; i < 20; i++) {
-        lv.sorted_push(rand());
-    }
+//    for (int i = 1; i < 5; i++) {
+//        lv.sorted_push(rand());
+//    }
 
     lv.sorted_push(4);
     lv.sorted_push(2);
