@@ -31,7 +31,6 @@ int Analyzer::linearSearch(int data[], const int length, const int key)
 
 void Analyzer::selectionSort(int data[], const int length)
 {
-
     opp++; // i = 0
     for (int i = 0,j,least; i < length - 1; i++) {
 
@@ -57,6 +56,7 @@ int Analyzer::binarySearch(int data[], const int length, const int key)
     int mid = 0;
     int high = length;
 
+    selectionSort(data, length);
     while (low <= high) {
         opp += 2;
 

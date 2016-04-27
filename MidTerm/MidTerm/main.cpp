@@ -27,8 +27,8 @@ int main()
 
     Analyzer a;
 
+    // Optimized Vector
     int size = 5000;
-
     for (int i = 0; i < 4; i++) {
         a.startTime();
         OptimizedVector<int> ov;
@@ -43,8 +43,9 @@ int main()
         std::cout << "Number of operations: " << ov.getOp() << "\n";
         size *= 2;
     }
-    size = 5000;
 
+    // List Vector
+    size = 5000;
     for (int i = 0; i < 4; i++) {
         a.startTime();
         ListVector<int> lv;
@@ -59,9 +60,9 @@ int main()
         std::cout << "Number of operations: " << lv.getOp() << "\n";
         size *= 2;
     }
-    size = 5000;
 
     // Linear Search
+    size = 10000;
     int key = -1; // key is set to not be in list. This is to test for worst case
     for (int i = 0; i < 4; i++) {
 
@@ -81,7 +82,7 @@ int main()
     }
 
     // Binary Search with selection sort
-    size = 5000;
+    size = 10000;
     for (int i = 0; i < 4; i++) {
 
         int* binArray = new int[size];
