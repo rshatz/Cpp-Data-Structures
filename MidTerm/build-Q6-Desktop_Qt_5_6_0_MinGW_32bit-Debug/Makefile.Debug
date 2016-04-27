@@ -108,7 +108,8 @@ compiler_clean:
 ####### Compile
 
 debug/main.o: ../Q6/main.cpp ../Q6/Analyzer.h \
-		../Q6/ListVector.h
+		../Q6/ListVector.h \
+		../Q6/OptimizedVector.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\main.o ..\Q6\main.cpp
 
 debug/Analyzer.o: ../Q6/Analyzer.cpp ../Q6/Analyzer.h

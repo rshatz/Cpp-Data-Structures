@@ -1,5 +1,6 @@
 #include "Analyzer.h"
 #include "ListVector.h"
+#include "OptimizedVector.h"
 
 #include <iostream>
 #include <ctime>
@@ -23,32 +24,53 @@ void print(int arr[], const int arrSize)
 int main()
 { 
     srand(static_cast<unsigned int>(time(0)));
-    ListVector<int> lv;
-
-    for (int i = 1; i < 500; i++) {
-        lv.sorted_push(rand());
-    }
-
-    lv.sorted_push(3);
-    lv.sorted_push(1);
-    lv.sorted_push(2);
-
-//    for (int i = 0; i < lv.size(); i++) {
-//        std::cout << lv.at(i) << "\n";
-//    }
 
     Analyzer a;
 
-    int size = 10000;
-    int key = -1; // key is set to not be in list. This is to test for worst case
+    int size = 5000;
+
+    for (int i = 0; i < 4; i++) {
+        a.startTime();
+        OptimizedVector<int> ov;
+        for (int j = 0; j < size; j++) {
+            ov.insert(rand());
+        }
+        a.endTime();
+        std::cout << "-------------------------\n"
+                  << " Optimized Vector " << i + 1 << " Results:\n"
+                  << "-------------------------\n";
+        a.display();
+        std::cout << "Number of operations: " << ov.getOp() << "\n";
+        size *= 2;
+    }
+    size = 5000;
+
+    for (int i = 0; i < 4; i++) {
+        a.startTime();
+        ListVector<int> lv;
+        for (int j = 1; j < size; j++) {
+            lv.sorted_push(rand());
+        }
+        a.endTime();
+        std::cout << "-------------------------\n"
+                  << " List Vector " << i + 1 << " Results:\n"
+                  << "-------------------------\n";
+        a.display();
+        std::cout << "Number of operations: " << lv.getOp() << "\n";
+        size *= 2;
+    }
+    size = 5000;
 
     // Linear Search
+    int key = -1; // key is set to not be in list. This is to test for worst case
     for (int i = 0; i < 4; i++) {
 
         int* lineArr = new int[size];
 
         fillArray(lineArr, size);
+        a.startTime();
         a.linearSearch(lineArr, size, key);
+        a.endTime();
         std::cout << "-------------------------\n"
                   << " Linear Search " << i + 1 << " Results:\n"
                   << "-------------------------\n";
@@ -59,13 +81,15 @@ int main()
     }
 
     // Binary Search with selection sort
-    size = 10000;
+    size = 5000;
     for (int i = 0; i < 4; i++) {
 
         int* binArray = new int[size];
 
         fillArray(binArray, size);
+        a.startTime();
         a.binarySearch(binArray, size, key);
+        a.endTime();
         std::cout << "-------------------------\n"
                   << " Binary Search " << i + 1  << " Results:\n"
                   << "-------------------------\n";

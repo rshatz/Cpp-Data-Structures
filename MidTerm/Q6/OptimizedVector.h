@@ -4,6 +4,8 @@
 #include <cstddef>
 #include <iostream>
 
+#include "Analyzer.h"
+
 template <typename T>
 class OptimizedVector
 {
@@ -25,11 +27,13 @@ public:
     // modifiers:
     void push_back(const T& value);
     void pop_back();
-    void insert(const size_t position, const T& value);
+    void insert(const T& value);
     void erase(const size_t position);
 
     // capacity:
     size_t size() const {return sz;}
+
+    unsigned getOp() {return opp;}
 
 private:
 
@@ -37,22 +41,22 @@ private:
     struct Node
     {
         Node()
-           : link(nullptr)
+           : next(nullptr)
            , value(0) {}
 
         Node(const U val)
-            : link(nullptr)
+            : next(nullptr)
             , value(val) {}
 
         Node(const Node<U>* node)
-            : link(node->link)
+            : next(node->next)
             , value(node->value) {}
 
         Node(const Node<U>* lnk, U& val) // continue working on this
-            : link(lnk)
+            : next(lnk)
             , value(val) {}
 
-        Node<U> *link;
+        Node<U> *next;
         U value;
     };
 
@@ -61,9 +65,63 @@ private:
 
     Node<T>* head;
     size_t sz;
+    unsigned opp;
 };
 
 // Class implementation
+
+template <typename T>
+void OptimizedVector<T>::insert(const T& value)
+{
+    opp = 0;
+    Node<T> *newNode; // A new node
+    Node<T> *nodePtr; // To traverse the list
+    Node<T> *previousNode = nullptr; // The previous node
+    // Allocate a new node and store num there.
+    newNode = new Node<T>(value);
+
+    // If there are no nodes in the list
+    // make newNode the first node
+
+    if (!head) {
+        head = newNode;
+        newNode->next = nullptr;
+        opp++; opp++; opp++;
+    }
+    else // Otherwise, insert newNode
+    {
+        // Position nodePtr at the head of list.
+        nodePtr = head;
+        opp++;
+        // Initialize previousNode to nullptr.
+        previousNode = nullptr;
+        opp++;
+
+        // Skip all nodes whose value is less than num.
+        while (nodePtr != nullptr && nodePtr->value < value)
+        {
+            previousNode = nodePtr;
+            nodePtr = nodePtr->next;
+            opp++; opp++; opp++; opp++;
+        }
+
+        // If the new node is to be the 1st in the list,
+        // insert it before all other nodes.
+        if (previousNode == nullptr)
+        {
+            head = newNode;
+            newNode->next = nodePtr;
+            opp++; opp++; opp++;
+        }
+        else // Otherwise insert after the previous node.
+        {
+            previousNode->next = newNode;
+            newNode->next = nodePtr;
+            opp++; opp++;
+        }
+    }
+
+}
 
 template <typename T>
 OptimizedVector<T>::OptimizedVector(const size_t s)
@@ -73,10 +131,10 @@ OptimizedVector<T>::OptimizedVector(const size_t s)
     Node<T> d;
     Node<T>* nodePtr = &d;
     for (size_t i = 0; i < sz; i++) {
-        nodePtr->link = new Node<T>;
-        nodePtr = nodePtr->link;
+        nodePtr->next = new Node<T>;
+        nodePtr = nodePtr->next;
     }
-    this->head = d.link;
+    this->head = d.next;
 }
 
 template <typename T>
@@ -86,9 +144,9 @@ OptimizedVector<T>::OptimizedVector(const OptimizedVector& rhs)
 {
     Node<T>** current = &head;
 
-    for(Node<T>* loop = rhs.head; loop; loop = loop->link) {
+    for(Node<T>* loop = rhs.head; loop; loop = loop->next) {
         (*current) = new Node<T>(loop->value);
-        current    = &(*current)->link;
+        current    = &(*current)->next;
         ++sz;
     }
 }
@@ -113,7 +171,7 @@ OptimizedVector<T>::~OptimizedVector()
 {
     Node<T>* nodePtr = head;
     while (nodePtr != nullptr) {
-        Node<T>* nextNode = nodePtr->link;
+        Node<T>* nextNode = nodePtr->next;
         delete nodePtr;
         nodePtr = nextNode;
     }
@@ -128,7 +186,7 @@ const T& OptimizedVector<T>::at(const size_t position) const
     } else {
 
         for (size_t i = 0; i < position; i++) {
-            nodePtr = nodePtr->link;
+            nodePtr = nodePtr->next;
         }
     }
     return nodePtr->value;
@@ -150,11 +208,11 @@ void OptimizedVector<T>::push_back(const T& value)
     } else {
         Node<T>* nodePtr = head;
         // Go to the last node in the list.
-        while (nodePtr->link) {
-            nodePtr = nodePtr->link;
+        while (nodePtr->next) {
+            nodePtr = nodePtr->next;
         }
         // Insert newNode as the last node.
-        nodePtr->link = newNode;
+        nodePtr->next = newNode;
     }
     ++sz;
 }
@@ -164,7 +222,7 @@ void OptimizedVector<T>::pop_back()
 {
     if (!head) {
         return;
-    } else if (!head->link) {
+    } else if (!head->next) {
         delete head;
         head = nullptr;
         sz = 0;
@@ -173,43 +231,14 @@ void OptimizedVector<T>::pop_back()
         Node<T>* nodePtr = head;
         Node<T>* previousNode = nullptr;
 
-        while (nodePtr->link) {
+        while (nodePtr->next) {
             previousNode = nodePtr;
-            nodePtr = nodePtr->link;
+            nodePtr = nodePtr->next;
         }
-        previousNode->link = nullptr;
+        previousNode->next = nullptr;
         delete nodePtr;
         --sz;
     }
-}
-
-template <typename T>
-void OptimizedVector<T>::insert(const size_t position, const T& value)
-{
-    if (position > sz) {
-        subError();
-    }
-
-    Node<T>* newNode = new Node<T>(value);
-    Node<T>* nodePtr = head;
-    Node<T>* previousNode = nullptr;
-
-    if (head == nullptr) {
-        head = newNode;
-    // Insert at beginning of list
-    } else if (position == 0) {
-        head = newNode;
-        newNode->link = nodePtr;
-    // Otherwise insert new node at given position
-    } else {
-        for (size_t i = 0; i < position; i++) {
-            previousNode = nodePtr;
-            nodePtr = nodePtr->link;
-        }
-        previousNode->link = newNode;
-        newNode->link = nodePtr;
-    }
-    ++sz;
 }
 
 template <typename T>
@@ -222,15 +251,15 @@ void OptimizedVector<T>::erase(const size_t position)
     Node<T>* previousNode = nullptr;
     // Erase first element
     if (position == 0) {
-        head = nodePtr->link;
+        head = nodePtr->next;
         delete nodePtr;
     // Otherwise erase element at position
     } else {
         for (size_t i = 0; i < position; i++) {
             previousNode = nodePtr;
-            nodePtr = nodePtr->link;
+            nodePtr = nodePtr->next;
         }
-        previousNode->link = nodePtr->link;
+        previousNode->next = nodePtr->next;
         delete nodePtr;
     }
     --sz;

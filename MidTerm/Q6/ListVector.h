@@ -2,6 +2,7 @@
 #define LISTVECTOR_H
 
 #include <iostream>
+#include <ctime>
 
 template<typename T>
 class ListVector {
@@ -20,6 +21,8 @@ public:
 
     const T& at(const size_t position) const;
     size_t size() const {return sz;}
+
+    long long getOp() {return opp;}
 
 private:
 
@@ -52,30 +55,37 @@ private:
     Link<T>* last;
 
     size_t sz;
+
+    unsigned opp;
 };
 
 template<typename T>
 void ListVector<T>::sorted_push(const T &v)
 {
+    opp = 0;
     Link<T>* newNode = new Link<T>(v);
     sz++;
 
     if(!first) {
         first = newNode;
+        opp += 2;
     } else {
 
         Link<T>* nodePtr = first;
+        opp++;
         while (nodePtr->next != nullptr && nodePtr->next->value < v) {
             nodePtr = nodePtr->next;
+            opp += 3;
         }
         if (nodePtr) { // nodePtr did not reach end of the list
             newNode->next = nodePtr->next;
             nodePtr->next = newNode;
             newNode->prev = nodePtr;
+            opp += 4;
             if( newNode->next ){
                 ( newNode->next )->prev = newNode;
+                opp += 2;
             }
-
         }
     }
 }
