@@ -24,7 +24,7 @@ int Analyzer::linearSearch(int data[], const int length, const int key)
         inc++; // i++
     }
     clock_t end = clock();
-    elapsedTime = double(end - begin) / (CLOCKS_PER_SEC * 1000);
+    elapsedTime = double(end - begin) / CLOCKS_PER_SEC;
 
     return -1; // failure
 }
@@ -58,7 +58,7 @@ int Analyzer::binarySearch(int data[], const int length, const int key)
     arraySize = length;
 
     clock_t begin = clock();
-    //selectionSort(data, length);
+    selectionSort(data, length);
 
     int low = 0;
     int mid = 0;
@@ -91,6 +91,15 @@ int Analyzer::binarySearch(int data[], const int length, const int key)
     elapsedTime = double(end - begin) / CLOCKS_PER_SEC;
 
     return -1; // failure:
+}
+
+float Analyzer::pow(float base, int power) {
+
+    if (power != base) {
+        power /= 2;
+        pow(base, power);
+    }
+    return base;
 }
 
 void Analyzer::display()

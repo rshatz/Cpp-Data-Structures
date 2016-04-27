@@ -25,54 +25,53 @@ int main()
     srand(static_cast<unsigned int>(time(0)));
     ListVector<int> lv;
 
-//    for (int i = 1; i < 5; i++) {
-//        lv.sorted_push(rand());
-//    }
+    for (int i = 1; i < 500; i++) {
+        lv.sorted_push(rand());
+    }
 
-    lv.sorted_push(4);
-    lv.sorted_push(2);
+    lv.sorted_push(3);
     lv.sorted_push(1);
-    lv.sorted_push(5);
+    lv.sorted_push(2);
 
 //    for (int i = 0; i < lv.size(); i++) {
 //        std::cout << lv.at(i) << "\n";
 //    }
 
-//    Analyzer a;
+    Analyzer a;
 
-//    int size = 50000;
-//    int key = -1; // key is set to not be in list. This is to test for worst case
+    int size = 10000;
+    int key = -1; // key is set to not be in list. This is to test for worst case
 
-//    // Linear Search
-//    for (int i = 0; i < 4; i++) {
+    // Linear Search
+    for (int i = 0; i < 4; i++) {
 
-//        int* lineArr = new int[size];
+        int* lineArr = new int[size];
 
-//        fillArray(lineArr, size);
-//        a.linearSearch(lineArr, size, key);
-//        std::cout << "-------------------------\n"
-//                  << " Linear Search " << i + 1 << " Results:\n"
-//                  << "-------------------------\n";
-//        a.display();
-//        size *= 2;
+        fillArray(lineArr, size);
+        a.linearSearch(lineArr, size, key);
+        std::cout << "-------------------------\n"
+                  << " Linear Search " << i + 1 << " Results:\n"
+                  << "-------------------------\n";
+        a.display();
+        size *= 2;
 
-//        delete[] lineArr;
-//    }
+        delete[] lineArr;
+    }
 
-//    // Binary Search with selection sort
-//    size = 5000;
-//    for (int i = 0; i < 4; i++) {
+    // Binary Search with selection sort
+    size = 10000;
+    for (int i = 0; i < 4; i++) {
 
-//        int* binArray = new int[size];
+        int* binArray = new int[size];
 
-//        fillArray(binArray, size);
-//        a.binarySearch(binArray, size, key);
-//        std::cout << "-------------------------\n"
-//                  << " Binary Search " << i + 1  << " Results:\n"
-//                  << "-------------------------\n";
-//        a.display();
-//        size *= 2;
+        fillArray(binArray, size);
+        a.binarySearch(binArray, size, key);
+        std::cout << "-------------------------\n"
+                  << " Binary Search " << i + 1  << " Results:\n"
+                  << "-------------------------\n";
+        a.display();
+        size *= 2;
 
-//        delete[] binArray;
-//    }
+        delete[] binArray;
+    }
 }

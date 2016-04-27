@@ -17,6 +17,7 @@ public:
     int linearSearch(int data[], const int length, const int key);
     int binarySearch(int data[], const int length, const int key);
     void selectionSort(int data[], const int length);
+    float pow(float base, int power);
 
     void display(); // show results
 

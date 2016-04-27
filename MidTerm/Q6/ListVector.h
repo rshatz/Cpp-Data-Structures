@@ -62,26 +62,20 @@ void ListVector<T>::sorted_push(const T &v)
 
     if(!first) {
         first = newNode;
-        std::cout << newNode->value << " \n";
     } else {
 
         Link<T>* nodePtr = first;
-        while (nodePtr != nullptr && nodePtr->value < v) {
+        while (nodePtr->next != nullptr && nodePtr->next->value < v) {
             nodePtr = nodePtr->next;
         }
         if (nodePtr) { // nodePtr did not reach end of the list
-
-            std::cout << newNode->value << " \n";
-            newNode->next = nodePtr;
-            newNode->prev = nodePtr->prev;
-            nodePtr->prev = newNode;
-
-        } else { // nodePtr reached the end of the list
-
-            std::cout << newNode->value << "\n";
-            nodePtr = newNode;
+            newNode->next = nodePtr->next;
+            nodePtr->next = newNode;
             newNode->prev = nodePtr;
-            last = newNode;
+            if( newNode->next ){
+                ( newNode->next )->prev = newNode;
+            }
+
         }
     }
 }
