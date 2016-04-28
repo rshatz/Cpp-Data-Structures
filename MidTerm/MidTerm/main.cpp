@@ -27,8 +27,49 @@ int main()
 
     Analyzer a;
 
-    // Optimized Vector
+
+
+    // Linear Search
     int size = 5000;
+    int key = -1; // key is set to not be in list. This is to test for worst case
+    for (int i = 0; i < 4; i++) {
+
+        int* lineArr = new int[size];
+
+        fillArray(lineArr, size);
+        a.startTime();
+        a.linearSearch(lineArr, size, key);
+        a.endTime();
+        std::cout << "-------------------------\n"
+                  << " Linear Search " << i + 1 << " Results:\n"
+                  << "-------------------------\n";
+        a.display();
+        size *= 2;
+
+        delete[] lineArr;
+    }
+
+    // Binary Search with selection sort
+    size = 5000;
+    for (int i = 0; i < 4; i++) {
+
+        int* binArray = new int[size];
+
+        fillArray(binArray, size);
+        a.startTime();
+        a.binarySearch(binArray, size, key);
+        a.endTime();
+        std::cout << "-------------------------\n"
+                  << " Binary Search " << i + 1  << " Results:\n"
+                  << "-------------------------\n";
+        a.display();
+        size *= 2;
+
+        delete[] binArray;
+    }
+
+    // Optimized Vector
+    size = 5000;
     for (int i = 0; i < 4; i++) {
         a.startTime();
         OptimizedVector<int> ov;
@@ -59,44 +100,5 @@ int main()
         a.display();
         std::cout << "Number of operations: " << lv.getOp() << "\n";
         size *= 2;
-    }
-
-    // Linear Search
-    size = 10000;
-    int key = -1; // key is set to not be in list. This is to test for worst case
-    for (int i = 0; i < 4; i++) {
-
-        int* lineArr = new int[size];
-
-        fillArray(lineArr, size);
-        a.startTime();
-        a.linearSearch(lineArr, size, key);
-        a.endTime();
-        std::cout << "-------------------------\n"
-                  << " Linear Search " << i + 1 << " Results:\n"
-                  << "-------------------------\n";
-        a.display();
-        size *= 2;
-
-        delete[] lineArr;
-    }
-
-    // Binary Search with selection sort
-    size = 10000;
-    for (int i = 0; i < 4; i++) {
-
-        int* binArray = new int[size];
-
-        fillArray(binArray, size);
-        a.startTime();
-        a.binarySearch(binArray, size, key);
-        a.endTime();
-        std::cout << "-------------------------\n"
-                  << " Binary Search " << i + 1  << " Results:\n"
-                  << "-------------------------\n";
-        a.display();
-        size *= 2;
-
-        delete[] binArray;
     }
 }
