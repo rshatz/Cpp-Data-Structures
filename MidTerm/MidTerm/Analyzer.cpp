@@ -17,7 +17,7 @@ int Analyzer::linearSearch(int data[], const int length, const int key)
     clear(); // reset values to 0
     arraySize = length;
 
-    opp++;  // i = 0
+    opp++;  
     for (int i = 0; i < length; i++) {
 
         if (key == data[i]) {
@@ -31,7 +31,7 @@ int Analyzer::linearSearch(int data[], const int length, const int key)
 
 void Analyzer::selectionSort(int data[], const int length)
 {
-    opp++; // i = 0
+    opp++;
     for (int i = 0,j,least; i < length - 1; i++) {
 
         opp += 2;
@@ -42,8 +42,8 @@ void Analyzer::selectionSort(int data[], const int length)
                 least = j;
             }
         }
-        opp++; // std::swap(data[least],data[i]);
         std::swap(data[least],data[i]);
+        opp++;
     }
 }
 
