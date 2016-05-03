@@ -10,7 +10,11 @@ CONFIG -= app_bundle
 TEMPLATE = app
 
 SOURCES += main.cpp \
-    House.cpp
+    Dealer.cpp \
+    MainMenu.cpp \
+    Player.cpp
 
 HEADERS += \
-    House.h
+    Dealer.h \
+    MainMenu.h \
+    Player.h

@@ -1,17 +1,20 @@
-#ifndef HOUSE_H
-#define HOUSE_H
+#ifndef DEALER_H
+#define DEALER_H
 
 #include <map>
 #include <list>
 #include <queue>
+#include <set>
 #include <string>
+#include <unistd.h>
 
 using std::map;
 using std::list;
 using std::queue;
+using std::set;
 using std::string;
 
-class House
+class Dealer
 {
 private:
 
@@ -33,9 +36,11 @@ private:
                              };
 
     queue<map<string, int>> deck;
+    list<map<string, int>> hand;
+    set<int> bet = {10, 20, 50, 100, 250, 500, 1000, 5000};
 
 public:
-    House();
+    Dealer();
 };
 
-#endif // HOUSE_H
+#endif // DEALER_H
