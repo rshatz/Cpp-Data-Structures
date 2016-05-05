@@ -112,13 +112,17 @@ compiler_clean:
 
 ####### Compile
 
-release/main.o: ../BlackJack/main.cpp ../BlackJack/Dealer.h
+release/main.o: ../BlackJack/main.cpp ../BlackJack/Dealer.h \
+		../BlackJack/MainMenu.h \
+		../BlackJack/Player.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\main.o ..\BlackJack\main.cpp
 
 release/Dealer.o: ../BlackJack/Dealer.cpp ../BlackJack/Dealer.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\Dealer.o ..\BlackJack\Dealer.cpp
 
-release/MainMenu.o: ../BlackJack/MainMenu.cpp ../BlackJack/MainMenu.h
+release/MainMenu.o: ../BlackJack/MainMenu.cpp ../BlackJack/MainMenu.h \
+		../BlackJack/Player.h \
+		../BlackJack/Dealer.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\MainMenu.o ..\BlackJack\MainMenu.cpp
 
 release/Player.o: ../BlackJack/Player.cpp ../BlackJack/Player.h

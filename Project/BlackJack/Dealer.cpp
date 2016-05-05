@@ -32,7 +32,7 @@ void Dealer::shuffleDeck()
 
 const string& Dealer::dealCard()
 {
-    string* temp = new string(deck.front());
+    string& temp = deck.front();
     deck.pop();
-    return *temp;
+    return temp;
 }

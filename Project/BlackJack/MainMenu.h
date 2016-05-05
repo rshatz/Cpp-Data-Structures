@@ -9,6 +9,7 @@ class MainMenu
 public:
 
     MainMenu();
+    void display();
 
 private:
 

@@ -112,13 +112,17 @@ compiler_clean:
 
 ####### Compile
 
-debug/main.o: ../BlackJack/main.cpp ../BlackJack/Dealer.h
+debug/main.o: ../BlackJack/main.cpp ../BlackJack/Dealer.h \
+		../BlackJack/MainMenu.h \
+		../BlackJack/Player.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\main.o ..\BlackJack\main.cpp
 
 debug/Dealer.o: ../BlackJack/Dealer.cpp ../BlackJack/Dealer.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\Dealer.o ..\BlackJack\Dealer.cpp
 
-debug/MainMenu.o: ../BlackJack/MainMenu.cpp ../BlackJack/MainMenu.h
+debug/MainMenu.o: ../BlackJack/MainMenu.cpp ../BlackJack/MainMenu.h \
+		../BlackJack/Player.h \
+		../BlackJack/Dealer.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\MainMenu.o ..\BlackJack\MainMenu.cpp
 
 debug/Player.o: ../BlackJack/Player.cpp ../BlackJack/Player.h

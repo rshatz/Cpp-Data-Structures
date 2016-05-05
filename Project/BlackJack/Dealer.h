@@ -1,6 +1,8 @@
 #ifndef DEALER_H
 #define DEALER_H
 
+#include "Player.h"
+
 #include <map>
 #include <list>
 #include <queue>
@@ -12,13 +14,13 @@ using std::list;
 using std::queue;
 using std::string;
 
-class Dealer
+class Dealer : public Player
 {
 public:
 
     Dealer();
 
-    const int& getHandTotal() const {return handTotal;}
+    int getHandTotal() const {return handTotal;}
     const string& dealCard();
 
 private:
