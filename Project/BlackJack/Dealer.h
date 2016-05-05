@@ -15,11 +15,15 @@ using std::string;
 class Dealer
 {
 public:
+
     Dealer();
+
+    const int& getHandTotal() const {return handTotal;}
+    const string& dealCard();
 
 private:
 
-   void shuffleCards();
+   void shuffleDeck();
 
    const map<string, int> cards = {  // Hearts
                                    {"1H", 1}, {"2H", 2}, {"3H", 3}, {"4H", 4}, {"5H", 5}
@@ -41,6 +45,8 @@ private:
 
     queue<string> deck;
     list<map<string, int>> hand;
+
+    int handTotal;
 };
 
 #endif // DEALER_H

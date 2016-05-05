@@ -14,18 +14,19 @@ class Player
 public:
 
     Player()
-        : cardSum(0)
-        , account(0) {}
+        : handTotal(0)
+        , account(1000) {}
 
-    void placeBet();
+    void placeBet(const int bet) {currentBet = bet;}
+    const int& getHandTotal() const {return handTotal;}
 
 private:
 
     list<string> hand;
-    set<int> bet = { 10, 20, 50, 100, 250, 500, 1000 };
 
-    int cardSum;
+    int handTotal;
     int account;
+    int currentBet;
 };
 
 #endif // PLAYER_H

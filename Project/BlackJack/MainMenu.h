@@ -12,6 +12,8 @@ public:
 
 private:
 
+    const set<int> chipValue = { 10, 20, 50, 100, 250, 500, 1000 };
+
     Player player;
     Dealer dealer;
 };
