@@ -11,10 +11,13 @@ TEMPLATE = app
 
 SOURCES += main.cpp \
     Dealer.cpp \
-    MainMenu.cpp \
-    Player.cpp
+    Player.cpp \
+    Deck.cpp \
+    BlackJack.cpp
 
 HEADERS += \
     Dealer.h \
-    MainMenu.h \
-    Player.h
+    Player.h \
+    Deck.h \
+    BlackJack.h
+
