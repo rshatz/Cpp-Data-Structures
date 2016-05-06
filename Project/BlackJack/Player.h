@@ -4,6 +4,7 @@
 #include <list>
 #include <set>
 #include <string>
+#include <iostream> // delete
 
 using std::list;
 using std::string;
@@ -17,8 +18,10 @@ public:
         : handTotal(0)
         , account(1000) {}
 
-    void placeBet(const int bet) {currentBet = bet;}
-    const int& getHandTotal() const {return handTotal;}
+    void placeBet(const int bet) { currentBet = bet; }
+    void hit(const string card) { hand.push_back(card); }
+    string showHand() const;
+    int getHandTotal() const { return handTotal; }
 
 private:
 

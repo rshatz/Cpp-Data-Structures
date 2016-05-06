@@ -16,6 +16,7 @@ public:
     Deck();
 
     void shuffle();
+    string& popDeck();
 
 private:
 

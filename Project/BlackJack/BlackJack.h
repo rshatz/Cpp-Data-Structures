@@ -10,8 +10,10 @@ class BlackJack
 public:
 
     BlackJack();
-    void takeBets(); // Take bets at beging of each round.
-    void dealCards(Dealer& dealer); // Deals two cards for each player at begining of round.
+
+    void takeBet(); // Take bets at beging of each round.
+    void dealCards(); // Deals two cards for each player at begining of round.
+    void showCards() const;
 
 private:
 

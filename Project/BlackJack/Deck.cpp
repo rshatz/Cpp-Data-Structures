@@ -27,3 +27,31 @@ void Deck::shuffle()
         ivect++;
     }
 }
+
+string& Deck::popDeck()
+{
+    string& temp = deck.front();
+    deck.pop();
+    return temp;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
