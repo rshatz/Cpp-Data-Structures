@@ -17,6 +17,7 @@ public:
 
     void shuffle();    // Creates new deck and shuffles it.
     string& popDeck(); // Removes first card off deck.
+    int cardValue(const string card);
 
 private:
 

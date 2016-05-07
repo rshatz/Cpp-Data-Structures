@@ -40,6 +40,11 @@ void Deck::emptyDeck() {
     shuffle();
 }
 
+int Deck::cardValue(const std::string card)
+{
+
+}
+
 
 
 
