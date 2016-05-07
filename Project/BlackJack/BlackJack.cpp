@@ -6,10 +6,12 @@ using std::cout;
 using std::cin;
 
 BlackJack::BlackJack()
+    : playerStays(false)
 {
     deck.shuffle();
-    takeBet();
+    //takeBet();
     dealCards();
+    showCards();
 }
 
 void BlackJack::takeBet()
@@ -37,14 +39,36 @@ void BlackJack::dealCards()
 {
     // deal two cards to each player
     for(int i = 0; i < 2; i++) {
-        player.hit(deck.popDeck());
-        dealer.hit(deck.popDeck());
+        pHand.push_back(deck.popDeck());
+        dHand.push_back(deck.popDeck());
     }
+    pHand.sort();
+    dHand.sort();
 }
 
 void BlackJack::showCards() const
 {
+    cout << "Player's Hand: ";
+    list<string>::const_iterator iter = pHand.begin();
 
+    while(iter != pHand.end()) {
+        cout << *iter << " ";
+        iter++;
+    }
+    cout << "\nDealer's Hand: ";
+
+    // if player stands than loop through all of dealer's cards
+    // else show one card from dealer's hand
+    iter = dHand.begin();
+    if(playerStays) {
+        while(iter != pHand.end()) {
+            cout << *iter << " ";
+            iter++;
+        }
+    }
+    else {
+        cout << *iter << " *\n";
+    }
 }
 
 

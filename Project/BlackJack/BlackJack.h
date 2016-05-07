@@ -1,9 +1,14 @@
 #ifndef BLACKJACK_H
 #define BLACKJACK_H
 
-#include "Dealer.h"
 #include "Player.h"
 #include "Deck.h"
+
+#include <set>
+#include <list>
+
+using std::list;
+using std::set;
 
 class BlackJack
 {
@@ -18,9 +23,16 @@ public:
 private:
 
     set<int> chips = { 10, 20, 50, 100, 250, 500, 1000 };
+
     Player player;
-    Dealer dealer;
+    Player dealer;
+
     Deck deck;
+
+    list<string> pHand;
+    list<string> dHand;
+
+    bool playerStays;
 };
 
 #endif // BLACKJACK_H

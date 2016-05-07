@@ -3,15 +3,9 @@
 #include <vector>
 #include <algorithm>
 
-using std::vector;
-
-Deck::Deck()
-{
-
-}
-
 void Deck::shuffle()
 {
+    using std::vector;
     vector<string> vect;
 
     map<string, int>::const_iterator imap;
@@ -30,11 +24,21 @@ void Deck::shuffle()
 
 string& Deck::popDeck()
 {
+    if(deck.empty()) {
+        shuffle();
+    }
     string& temp = deck.front();
     deck.pop();
     return temp;
 }
 
+void Deck::emptyDeck() {
+
+    while(!(deck.empty())) {
+        deck.pop();
+    }
+    shuffle();
+}
 
 
 
