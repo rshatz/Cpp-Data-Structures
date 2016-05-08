@@ -19,10 +19,12 @@ public:
 
     void placeBet(const int bet) { currentBet = bet; }
     void pushCard(const string card);
-    void showHand();
+    void showHand(const bool hideCard) const; // Set ture if second card in hand should be hidden else false.
     int getHandTotal() const { return handTotal; }
 
 private:
+
+    void tallyHand();
 
     const map<string, int> cards = { // Hearts
                                     {"AH", 11}, {"2H", 2}, {"3H", 3}, {"4H", 4}, {"5H", 5}

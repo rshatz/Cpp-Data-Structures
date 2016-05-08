@@ -44,9 +44,13 @@ void BlackJack::dealCards()
     }
 }
 
-void BlackJack::showCards()
+void BlackJack::showCards() const
 {
-    player.showHand();
+    cout << "Player's Hand: ";
+    player.showHand(false);
+
+    cout << "\nDealer's Hand: ";
+    dealer.showHand(true);
 }
 
 

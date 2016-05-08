@@ -8,29 +8,25 @@ void Player::pushCard(const std::string card)
 {
     hand.push_back(card);
     hand.sort();
+    tallyHand();
 }
 
-void Player::showHand()
+void Player::tallyHand()
 {
-        cout << "Player's Hand: ";
-        list<string>::const_iterator iter = hand.begin();
 
+}
+
+void Player::showHand(bool hideCard) const
+{
+    list<string>::const_iterator iter = hand.begin();
+
+    if(hideCard) {
+        cout << *iter << " *\n";
+    }
+    else {
         while(iter != hand.end()) {
             cout << *iter << " ";
             iter++;
         }
-        cout << "\nDealer's Hand: ";
-
-        // if player stands than loop through all of dealer's cards
-        // else show one card from dealer's hand
-//        iter = hand.begin();
-//        if(playerStays) {
-//            while(iter != hand.end()) {
-//                cout << *iter << " ";
-//                iter++;
-//            }
-//        }
-//        else {
-//            cout << *iter << " *\n";
-//        }
+    }
 }
