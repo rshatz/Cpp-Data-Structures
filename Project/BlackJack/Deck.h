@@ -2,11 +2,9 @@
 #define DECK_H
 
 #include <set>
-#include <map>
 #include <queue>
 #include <string>
 
-using std::map;
 using std::set;
 using std::queue;
 using std::string;

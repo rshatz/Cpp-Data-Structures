@@ -6,10 +6,9 @@ using std::cout;
 using std::cin;
 
 BlackJack::BlackJack()
-    : playerStays(false)
 {
     deck.shuffle();
-    //takeBet();
+    takeBet();
     dealCards();
     showCards();
 }
@@ -44,7 +43,34 @@ void BlackJack::dealCards()
     }
 }
 
-void BlackJack::showCards() const
+void BlackJack::menu()
+{
+    char choice;
+    cout << "Enter h to hit s to stay: ";
+    cin >> choice;
+    if(tolower(choice) == 'h') {
+        hit();
+        showCards();
+    }
+    else if(tolower(choice) == 's') {
+        // stay();
+    }
+    else {
+        // invalid choice
+    }
+}
+
+void BlackJack::hit()
+{
+    player.pushCard(deck.popCard());
+
+    if(player.getHandTotal() > 21) {
+        player.showHand(false);
+        cout << " Bust!\n";
+    }
+}
+
+void BlackJack::showCards()
 {
     cout << "Player's Hand: ";
     player.showHand(false);
@@ -52,7 +78,10 @@ void BlackJack::showCards() const
 
     cout << "\nDealer's Hand: ";
     dealer.showHand(true);
-    cout << " " << dealer.getHandTotal();
+    cout << " " << dealer.getHandTotal() << "\n";
+
+    // Show menu after initial deal
+    menu();
 }
 
 

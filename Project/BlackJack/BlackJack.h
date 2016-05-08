@@ -5,9 +5,7 @@
 #include "Deck.h"
 
 #include <set>
-#include <list>
 
-using std::list;
 using std::set;
 
 class BlackJack
@@ -19,9 +17,10 @@ public:
 private:
 
     void takeBet(); // Take bets at beging of each round.
-    void dealCards(); // Deals two cards for each player at begining of round.
-    void showCards() const; // Display cards
-    int cardValue(const string card); // Add value of card to total hand value
+    void dealCards(); // Deals two cards for each player at begining of each round.
+    void hit(); // Add a card to a player's hand.
+    void showCards(); // Display cards
+    void menu(); // Shows blackjack options menu.
 
     set<int> chips = { 10, 20, 50, 100, 250, 500, 1000 };
 
@@ -29,8 +28,6 @@ private:
     Player dealer;
 
     Deck deck;
-
-    bool playerStays;
 };
 
 #endif // BLACKJACK_H
