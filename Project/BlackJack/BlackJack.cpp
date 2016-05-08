@@ -8,7 +8,7 @@ using std::cin;
 BlackJack::BlackJack()
 {
     deck.shuffle();
-    takeBet();
+    //takeBet();
     dealCards();
     showCards();
 }
@@ -45,9 +45,11 @@ void BlackJack::dealCards()
 
 void BlackJack::menu()
 {
+    cout << "\nEnter h to hit s to stay: ";
+
     char choice;
-    cout << "Enter h to hit s to stay: ";
     cin >> choice;
+
     if(tolower(choice) == 'h') {
         hit();
         showCards();
@@ -56,7 +58,8 @@ void BlackJack::menu()
         // stay();
     }
     else {
-        // invalid choice
+        cout << "\nPlease enter a valid option.";
+        menu();
     }
 }
 
@@ -72,13 +75,11 @@ void BlackJack::hit()
 
 void BlackJack::showCards()
 {
-    cout << "Player's Hand: ";
+    cout << "\nPlayer's Hand: ";
     player.showHand(false);
-    cout << " " << player.getHandTotal();
 
     cout << "\nDealer's Hand: ";
     dealer.showHand(true);
-    cout << " " << dealer.getHandTotal() << "\n";
 
     // Show menu after initial deal
     menu();
