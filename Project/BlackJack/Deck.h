@@ -18,14 +18,14 @@ public:
     Deck() { shuffle(); }
 
     void shuffle();    // Creates new deck and shuffles it.
-    string& popDeck(); // Removes first card off deck.
-    int cardValue(const string card);
+    string& popCard(); // Removes first card off deck.
 
 private:
 
     void emptyDeck(); // Empty the deck so new cards can be added
 
-    set<string> cards = {"AH", "2H", "3H", "4H", "5H"
+    set<string> cards = {  // Hearts
+                         "AH", "2H", "3H", "4H", "5H"
                         ,"6H", "7H", "8H", "9H", "10H"
                         ,"JH", "QH", "KH"
                            // Diamonds

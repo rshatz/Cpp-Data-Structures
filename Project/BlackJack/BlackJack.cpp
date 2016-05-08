@@ -39,36 +39,14 @@ void BlackJack::dealCards()
 {
     // deal two cards to each player
     for(int i = 0; i < 2; i++) {
-        pHand.push_back(deck.popDeck());
-        dHand.push_back(deck.popDeck());
+        player.pushCard(deck.popCard());
+        dealer.pushCard(deck.popCard());
     }
-    pHand.sort();
-    dHand.sort();
 }
 
-void BlackJack::showCards() const
+void BlackJack::showCards()
 {
-    cout << "Player's Hand: ";
-    list<string>::const_iterator iter = pHand.begin();
-
-    while(iter != pHand.end()) {
-        cout << *iter << " ";
-        iter++;
-    }
-    cout << "\nDealer's Hand: ";
-
-    // if player stands than loop through all of dealer's cards
-    // else show one card from dealer's hand
-    iter = dHand.begin();
-    if(playerStays) {
-        while(iter != pHand.end()) {
-            cout << *iter << " ";
-            iter++;
-        }
-    }
-    else {
-        cout << *iter << " *\n";
-    }
+    player.showHand();
 }
 
 

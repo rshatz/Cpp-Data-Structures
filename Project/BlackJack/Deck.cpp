@@ -23,7 +23,7 @@ void Deck::shuffle()
     }
 }
 
-string& Deck::popDeck()
+string& Deck::popCard()
 {
     if(deck.empty()) {
         shuffle();
@@ -40,12 +40,6 @@ void Deck::emptyDeck() {
     }
     shuffle();
 }
-
-int Deck::cardValue(const std::string card)
-{
-
-}
-
 
 
 
