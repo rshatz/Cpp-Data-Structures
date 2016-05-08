@@ -24,7 +24,7 @@ public:
 
 private:
 
-    void tallyHand();
+    void tallyHand(const string card);
 
     const map<string, int> cards = { // Hearts
                                     {"AH", 11}, {"2H", 2}, {"3H", 3}, {"4H", 4}, {"5H", 5}

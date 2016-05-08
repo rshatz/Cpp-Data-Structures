@@ -8,12 +8,15 @@ void Player::pushCard(const std::string card)
 {
     hand.push_back(card);
     hand.sort();
-    tallyHand();
+    tallyHand(card);
 }
 
-void Player::tallyHand()
+void Player::tallyHand(const std::string card)
 {
+    map<string, int>::const_iterator imap;
+    imap = cards.find(card);
 
+    handTotal += imap->second;
 }
 
 void Player::showHand(bool hideCard) const

@@ -48,9 +48,11 @@ void BlackJack::showCards() const
 {
     cout << "Player's Hand: ";
     player.showHand(false);
+    cout << " " << player.getHandTotal();
 
     cout << "\nDealer's Hand: ";
     dealer.showHand(true);
+    cout << " " << dealer.getHandTotal();
 }
 
 
