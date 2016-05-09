@@ -50,20 +50,23 @@ void BlackJack::menu()
     char choice;
     cin >> choice;
 
-    if(tolower(choice) == 'h') {
-        hit();
+    switch (tolower(choice)) {
+    case 'h':
+        playerHit();
         showCards();
-    }
-    else if(tolower(choice) == 's') {
-        // stay();
-    }
-    else {
-        cout << "\nPlease enter a valid option.";
+        break;
+    case 's':
+        dealerHit();
+        showCards();
+        break;
+    default:
+        cout << "\nEnter a valid option.";
         menu();
+        break;
     }
 }
 
-void BlackJack::hit()
+void BlackJack::playerHit()
 {
     player.pushCard(deck.popCard());
 
@@ -73,13 +76,23 @@ void BlackJack::hit()
     }
 }
 
+void BlackJack::dealerHit()
+{
+    while(dealer.getHandTotal() < 17) {
+        dealer.pushCard(deck.popCard());
+    }
+    if(dealer.getHandTotal() > 21) {
+        cout << "Bust!\n";
+    }
+}
+
 void BlackJack::showCards()
 {
     cout << "\nPlayer's Hand: ";
     player.showHand(false);
 
     cout << "\nDealer's Hand: ";
-    dealer.showHand(true);
+    dealer.showHand(false);
 
     // Show menu after initial deal
     menu();
