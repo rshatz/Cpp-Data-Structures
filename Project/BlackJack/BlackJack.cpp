@@ -72,7 +72,7 @@ void BlackJack::playerHit()
 
     if(player.getHandTotal() > 21) {
         player.showHand(false);
-        cout << " Bust!\n";
+        cout << "Player busts!\n";
     }
 }
 
@@ -82,7 +82,7 @@ void BlackJack::dealerHit()
         dealer.pushCard(deck.popCard());
     }
     if(dealer.getHandTotal() > 21) {
-        cout << "Bust!\n";
+        cout << "Dealer busts!\n";
     }
 }
 
@@ -90,6 +90,7 @@ void BlackJack::showCards()
 {
     cout << "\nPlayer's Hand: ";
     player.showHand(false);
+    cout << player.getHandTotal();
 
     cout << "\nDealer's Hand: ";
     dealer.showHand(false);
