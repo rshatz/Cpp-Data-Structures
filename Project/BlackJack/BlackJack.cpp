@@ -2,6 +2,7 @@
 
 BlackJack::BlackJack()
     : hideCard(true)
+    , control(true)
 {
     newRound();
 }
@@ -9,37 +10,42 @@ BlackJack::BlackJack()
 void BlackJack::newRound()
 {
     deck.shuffle();
-    //takeBet();
+    takeBet();
     dealCards();
     showCards();
+
+    while(control) {
+        menu();
+        showCards();
+    }
+    checkWin();
 }
 
 void BlackJack::menu()
 {
+    cout << "\n\nEnter h to hit, or s to stay: ";
+
     char choice;
-    // If player has 21, player automatically stays - 's'.
-    if(player.getHandTotal() == 21) {
-        choice = 's';
-    }
-    else {
-        cout << "\nEnter h to hit s to stay: ";
-        cin >> choice;
-    }
+    cin >> choice;
 
     switch (tolower(choice)) {
     case 'h':
+
         playerHit();
-        showCards();
+        control = true; // Run menu() again.
         break;
+
     case 's':
-        dealerHit();
+
         hideCard = false; // Player's turn is complete. Show dealer's hand.
-        showCards();
-        //checkWin();
+        dealerHit();
+        control = false; // menu() terminates.
         break;
+
     default:
+
         cout << "\nEnter a valid option.";
-        menu();
+        control = true; // Run menu() again.
         break;
     }
 }
@@ -91,9 +97,6 @@ void BlackJack::showCards()
     else {
         dealer.showHand();
     }
-
-    // Show menu for player's options.
-    menu();
 }
 
 void BlackJack::playerHit()
@@ -101,9 +104,8 @@ void BlackJack::playerHit()
     player.pushCard(deck.popCard());
 
     if(player.getHandTotal() > 21) {
-        player.showHand();
-        cout << "Player busts!\n";
-        dealerWins();
+        cout << "\nPlayer busts!\n";
+        //dealerWins();
     }
 }
 
@@ -113,8 +115,8 @@ void BlackJack::dealerHit()
         dealer.pushCard(deck.popCard());
     }
     if(dealer.getHandTotal() > 21) {
-        cout << "Dealer busts!\n";
-        playerWins();
+        cout << "\nDealer busts!\n";
+        //playerWins();
     }
 }
 
@@ -127,21 +129,21 @@ void BlackJack::checkWin()
         dealerWins();
     }
     else {
-        cout << "PUSH!";
-        newRound();
+        cout << "\nPUSH!\n";
+        //newRound();
     }
 }
 
 void BlackJack::playerWins()
 {
-    cout << "Player wins!\n";
+    cout << "\nPlayer wins!\n";
     player.win();
-    newRound();
+    //newRound();
 }
 
 void BlackJack::dealerWins()
 {
-    cout << "Dealer wins.\n";
+    cout << "\nDealer wins.\n";
     player.lose();
-    newRound();
+    //newRound();
 }

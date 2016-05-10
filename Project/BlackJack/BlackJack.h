@@ -40,6 +40,7 @@ private:
     Deck deck;
 
     bool hideCard; // Test to see if dealer's 2nd card should be hidden.
+    bool control;
 };
 
 #endif // BLACKJACK_H
