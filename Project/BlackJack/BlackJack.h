@@ -20,8 +20,9 @@ private:
     void dealCards(); // Deals two cards for each player at begining of each round.
     void playerHit(); // Add a card to a player's hand.
     void dealerHit(); // Add a card to the dealer's hand.
-    void showCards(); // Display cards
+    void showCards(); // Display cards.
     void menu();      // Shows blackjack options menu.
+    void newRound();  // Start new round.
 
     set<int> chips = { 10, 20, 50, 100, 250, 500, 1000 };
 

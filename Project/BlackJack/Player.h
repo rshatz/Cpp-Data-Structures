@@ -21,7 +21,8 @@ public:
 
     void placeBet(const int bet) { currentBet = bet; }
     void pushCard(const string card);
-    void showHand(const bool hideCard) const; // Set ture if second card in hand should be hidden else false.
+    void showHand() const; // Show all cards in players hand.
+    void hideCard() const; // Show first card with second card hidden.
     int getHandTotal() const { return handTotal; }
 
 private:

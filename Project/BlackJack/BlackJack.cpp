@@ -7,6 +7,11 @@ using std::cin;
 
 BlackJack::BlackJack()
 {
+    newRound();
+}
+
+void BlackJack::newRound()
+{
     deck.shuffle();
     //takeBet();
     dealCards();
@@ -26,6 +31,7 @@ void BlackJack::takeBet()
     cin >> bet;
 
     auto check = chips.find(bet);
+    // Loop if invalid bet is made
     while(check == chips.end()) {
         cout << "Enter a valid chip value: ";
         cin >> bet;
@@ -41,6 +47,19 @@ void BlackJack::dealCards()
         player.pushCard(deck.popCard());
         dealer.pushCard(deck.popCard());
     }
+}
+
+void BlackJack::showCards()
+{
+    cout << "\nPlayer's Hand: ";
+    player.showHand();
+    cout << player.getHandTotal();
+
+    cout << "\nDealer's Hand: ";
+    dealer.hideCard();
+
+    // Show menu for player's options.
+    menu();
 }
 
 void BlackJack::menu()
@@ -71,7 +90,7 @@ void BlackJack::playerHit()
     player.pushCard(deck.popCard());
 
     if(player.getHandTotal() > 21) {
-        player.showHand(false);
+        player.showHand();
         cout << "Player busts!\n";
     }
 }
@@ -85,25 +104,3 @@ void BlackJack::dealerHit()
         cout << "Dealer busts!\n";
     }
 }
-
-void BlackJack::showCards()
-{
-    cout << "\nPlayer's Hand: ";
-    player.showHand(false);
-    cout << player.getHandTotal();
-
-    cout << "\nDealer's Hand: ";
-    dealer.showHand(false);
-
-    // Show menu after initial deal
-    menu();
-}
-
-
-
-
-
-
-
-
-
