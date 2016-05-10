@@ -8,7 +8,3 @@ int main()
     srand(std::time(0));
     BlackJack blackJack;
 }
-
-
-
-

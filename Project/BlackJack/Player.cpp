@@ -41,5 +41,3 @@ void Player::showHand() const
         iter++;
     }
 }
-
-

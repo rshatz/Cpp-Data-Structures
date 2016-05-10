@@ -16,14 +16,17 @@ public:
     Player()
         : handTotal(0)
         , account(1000)
-        , currentBet(0)
+        , bet(0)
         , aceCount(0) {}
 
-    void placeBet(const int bet) { currentBet = bet; }
+    void placeBet(const int placedBet) { bet = placedBet; }
     void pushCard(const string card);
     void showHand() const; // Show all cards in players hand.
     void hideCard() const; // Show first card with second card hidden.
+    void win() { account += bet; }
+    void lose() { account -= bet; }
     int getHandTotal() const { return handTotal; }
+
 
 private:
 
@@ -51,7 +54,7 @@ private:
 
     int handTotal;  // Numerical value of player's hand.
     int account;    // Players total chips.
-    int currentBet; // Hold the current bet.
+    int bet;        // Hold the current bet.
     int aceCount;   // Keep count of number of Aces.
 };
 
