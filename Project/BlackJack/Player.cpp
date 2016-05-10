@@ -40,12 +40,12 @@ void Player::showHand() const
 
 void Player::win()
 {
-    account += bet;
+    balance += bet;
 }
 
 void Player::lose()
 {
-    account -= bet;
+    balance -= bet;
 }
 
 void Player::clearHand()

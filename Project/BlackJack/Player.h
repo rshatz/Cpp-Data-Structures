@@ -18,7 +18,7 @@ public:
 
     Player()
         : handTotal(0)
-        , account(1000)
+        , balance(1000)
         , bet(0)
         , aceCount(0) {}
 
@@ -30,6 +30,7 @@ public:
     void lose(); // Subtracts bet from.
     void clearHand(); // Clear cards from player's hand and resets handTotal to 0.
     int getHandTotal() const { return handTotal; }
+    int getBalance() const {return balance; }
 
 private:
 
@@ -56,7 +57,7 @@ private:
     list<string> hand;
 
     int handTotal;  // Numerical value of player's hand.
-    int account;    // Players total chips.
+    int balance;    // Players total chips.
     int bet;        // Hold the current bet.
     int aceCount;   // Keep count of number of Aces.
 };

@@ -14,6 +14,7 @@ void BlackJack::newRound()
     dealCards();
     showCards();
 
+    control = true;
     while(control) {
         menu();
     }
@@ -27,6 +28,11 @@ void BlackJack::newDeal()
     player.clearHand();
     dealer.clearHand();
     hideCard = true;
+
+    if(!player.getBalance()) {
+        cout << "Sorry you are out of funds. Game Over\n";
+        exitGame();
+    }
 
     cout << " *********************************\n"
          << " *  d key = deal | q key = quit  *\n"
@@ -48,7 +54,6 @@ void BlackJack::newDeal()
     else {
         exitGame();
     }
-    //cin.ignore();
 }
 
 void BlackJack::menu()
@@ -95,7 +100,8 @@ void BlackJack::takeBet()
         cout << " $" << *iter << " ";
     }
 
-    cout << "\n\n  Place your bet: ";
+    cout << "\n\n  Your Account: $" << player.getBalance() << ".\n"
+         << "  Place your bet: $";
 
     int bet;
     cin >> bet;
