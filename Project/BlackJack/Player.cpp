@@ -29,7 +29,7 @@ void Player::tallyHand(const string card)
 
 void Player::hideCard() const
 {
-    cout << hand.front() << " *";
+    cout << "|" << hand.front() << "| *";
 }
 
 void Player::showHand() const
@@ -37,7 +37,7 @@ void Player::showHand() const
     list<string>::const_iterator iter = hand.begin();
 
     while(iter != hand.end()) {
-        cout << *iter << " ";
+        cout << "|" << *iter << "|";
         iter++;
     }
 }

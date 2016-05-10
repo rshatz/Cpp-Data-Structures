@@ -7,6 +7,7 @@
 
 #include <stdlib.h>
 #include <iostream>
+#include <iomanip>
 #include <set>
 
 using std::cout;
@@ -28,7 +29,7 @@ private:
     void showCards(); // Display cards.
     void menu();      // Shows blackjack options menu.
     void newRound();  // Current round terminates. Start new round.
-    void checkWin();
+    void checkWin();  // Check to see which player has higher value hand
     void playerWins();
     void dealerWins();
     void exitGame() { exit(0); }  // Game ends when player places a bet of 0.

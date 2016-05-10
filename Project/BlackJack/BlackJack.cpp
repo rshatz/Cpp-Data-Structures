@@ -8,17 +8,7 @@ BlackJack::BlackJack()
 }
 
 void BlackJack::newRound()
-{
-    cout << "Press Enter to play again: ";
-    char input;
-    cin >> input;
-
-    if(input == 'y') {
-        ClearScreen();
-    }
-    else {
-        exitGame();
-    }
+{ 
     deck.shuffle();
     takeBet();
     dealCards();
@@ -28,7 +18,30 @@ void BlackJack::newRound()
         menu();
         showCards();
     }
+
     checkWin();
+
+    cout << " *********************************\n"
+         << " *  d key = deal | q key = quit  *\n"
+         << " *********************************\n"
+         << " Enter: ";
+
+    char input;
+    cin >> input;
+
+    while(input != 'd') {
+        cout << "Enter a valid option: \n"
+             << "Enter: ";
+        cin >> input;
+    }
+    if(tolower(input) == 'd') {
+        ClearScreen();
+        menu();
+    }
+    else {
+        exitGame();
+    }
+    cin.ignore();
 }
 
 void BlackJack::menu()
@@ -72,12 +85,10 @@ void BlackJack::takeBet()
         cout << " $" << *iter << " ";
     }
 
-    cout << "\n\n  Enter a 0 bet to end the game.\n  Place your bet: ";
+    cout << "\n\n  Place your bet: ";
+
     int bet;
     cin >> bet;
-    if(!bet) {
-        exitGame();
-    }
 
     auto check = chips.find(bet);
     // Loop if invalid bet is made
@@ -100,15 +111,17 @@ void BlackJack::dealCards()
 
 void BlackJack::showCards()
 {
-    cout << "\n  Player's Hand: ";
+    cout << "\n  Player's Hand: "
+         << "-" << std::setw(2) << player.getHandTotal() << "- ";
     player.showHand();
-    cout << player.getHandTotal();
 
     cout << "\n  Dealer's Hand: ";
     if(hideCard) {
-        dealer.hideCard();
+        cout << "-??- ";
+        dealer.hideCard();   
     }
     else {
+        cout << "-" << std::setw(2) << dealer.getHandTotal() << "- ";
         dealer.showHand();
     }
     cout << "\n\n";
