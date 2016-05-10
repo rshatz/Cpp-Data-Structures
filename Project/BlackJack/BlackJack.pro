@@ -12,10 +12,12 @@ TEMPLATE = app
 SOURCES += main.cpp \
     Player.cpp \
     Deck.cpp \
-    BlackJack.cpp
+    BlackJack.cpp \
+    ClearScreen.cpp
 
 HEADERS += \
     Player.h \
     Deck.h \
-    BlackJack.h
+    BlackJack.h \
+    ClearScreen.h
 

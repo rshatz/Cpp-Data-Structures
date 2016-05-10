@@ -3,6 +3,7 @@
 
 #include "Player.h"
 #include "Deck.h"
+#include "ClearScreen.h"
 
 #include <stdlib.h>
 #include <iostream>
@@ -26,7 +27,7 @@ private:
     void dealerHit(); // Add a card to the dealer's hand.
     void showCards(); // Display cards.
     void menu();      // Shows blackjack options menu.
-    void newRound();  // Start new round.
+    void newRound();  // Current round terminates. Start new round.
     void checkWin();
     void playerWins();
     void dealerWins();
