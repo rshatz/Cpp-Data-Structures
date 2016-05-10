@@ -1,9 +1,5 @@
 #include "Player.h"
 
-#include <iostream>
-
-using std::cout;
-
 void Player::pushCard(const string card)
 {
     hand.push_back(card);

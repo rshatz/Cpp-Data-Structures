@@ -4,6 +4,8 @@
 #include <set>
 #include <queue>
 #include <string>
+#include <vector>
+#include <algorithm>
 
 using std::set;
 using std::queue;

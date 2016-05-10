@@ -1,10 +1,13 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
+#include <iostream>
 #include <string>
 #include <list>
 #include <map>
 
+
+using std::cout;
 using std::string;
 using std::list;
 using std::map;

@@ -1,8 +1,5 @@
 #include "Deck.h"
 
-#include <vector>
-#include <algorithm>
-
 using std::vector;
 
 void Deck::shuffle()
