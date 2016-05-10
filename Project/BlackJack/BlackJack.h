@@ -32,6 +32,7 @@ private:
     void newRound();  // Current round terminates. Start new round.
     void checkWin();  // Check to see which player has higher value hand
     void newDeal();   // Ask player if quit or continue game.
+    //void checkBust(); // Check if a player goes over 21.
     void playerWins();
     void dealerWins();
     void exitGame() { exit(0); }  // Game ends when player places a bet of 0.

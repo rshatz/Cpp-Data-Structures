@@ -16,7 +16,6 @@ void BlackJack::newRound()
 
     while(control) {
         menu();
-        showCards();
     }
 
     checkWin();
@@ -25,6 +24,10 @@ void BlackJack::newRound()
 
 void BlackJack::newDeal()
 {
+    player.clearHand();
+    dealer.clearHand();
+    hideCard = true;
+
     cout << " *********************************\n"
          << " *  d key = deal | q key = quit  *\n"
          << " *********************************\n"
@@ -45,7 +48,7 @@ void BlackJack::newDeal()
     else {
         exitGame();
     }
-    cin.ignore();
+    //cin.ignore();
 }
 
 void BlackJack::menu()
@@ -62,6 +65,7 @@ void BlackJack::menu()
     case 'h':
 
         playerHit();
+        showCards();
         control = true; // Run menu() again.
         break;
 
@@ -140,7 +144,6 @@ void BlackJack::playerHit()
 
     if(player.getHandTotal() > 21) {
         cout << "\n  Player bust! ";
-        hideCard = false;
         dealerWins();
     }
 }
@@ -166,20 +169,24 @@ void BlackJack::checkWin()
     }
     else {
         cout << "  PUSH!\n\n";
-        //newRound();
+        newDeal();
     }
 }
 
 void BlackJack::playerWins()
 {
     cout << "  Player wins!\n";
+    hideCard = false;
+    showCards();
     player.win();
-    //newRound();
+    newDeal();
 }
 
 void BlackJack::dealerWins()
 {
     cout << "  Dealer wins.\n";
+    hideCard = false;
+    showCards();
     player.lose();
-    //newRound();
+    newDeal();
 }

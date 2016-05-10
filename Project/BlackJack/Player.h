@@ -26,10 +26,10 @@ public:
     void pushCard(const string card);
     void showHand() const; // Show all cards in players hand.
     void hideCard() const; // Show first card with second card hidden.
-    void win() { account += bet; }
-    void lose() { account -= bet; }
+    void win(); // Adds bet to account.
+    void lose(); // Subtracts bet from.
+    void clearHand(); // Clear cards from player's hand and resets handTotal to 0.
     int getHandTotal() const { return handTotal; }
-
 
 private:
 

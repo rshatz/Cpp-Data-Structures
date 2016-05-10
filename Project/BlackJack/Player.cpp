@@ -37,3 +37,19 @@ void Player::showHand() const
         iter++;
     }
 }
+
+void Player::win()
+{
+    account += bet;
+}
+
+void Player::lose()
+{
+    account -= bet;
+}
+
+void Player::clearHand()
+{
+    hand.clear();
+    handTotal = 0;
+}

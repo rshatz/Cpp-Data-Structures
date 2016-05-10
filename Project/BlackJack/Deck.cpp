@@ -4,6 +4,7 @@ using std::vector;
 
 void Deck::shuffle()
 {
+    //emptyDeck(); // Empty the deck so new cards can be added.
     vector<string> vect;
 
     set<string>::const_iterator iset;
