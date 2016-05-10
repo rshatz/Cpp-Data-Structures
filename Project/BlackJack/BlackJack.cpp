@@ -9,9 +9,39 @@ BlackJack::BlackJack()
 void BlackJack::newRound()
 {
     deck.shuffle();
-    takeBet();
+    //takeBet();
     dealCards();
     showCards();
+}
+
+void BlackJack::menu()
+{
+    char choice;
+    // If player has 21, player automatically stays - 's'.
+    if(player.getHandTotal() == 21) {
+        choice = 's';
+    }
+    else {
+        cout << "\nEnter h to hit s to stay: ";
+        cin >> choice;
+    }
+
+    switch (tolower(choice)) {
+    case 'h':
+        playerHit();
+        showCards();
+        break;
+    case 's':
+        dealerHit();
+        hideCard = false; // Player's turn is complete. Show dealer's hand.
+        showCards();
+        //checkWin();
+        break;
+    default:
+        cout << "\nEnter a valid option.";
+        menu();
+        break;
+    }
 }
 
 void BlackJack::takeBet()
@@ -66,30 +96,6 @@ void BlackJack::showCards()
     menu();
 }
 
-void BlackJack::menu()
-{
-    cout << "\nEnter h to hit s to stay: ";
-
-    char choice;
-    cin >> choice;
-
-    switch (tolower(choice)) {
-    case 'h':
-        playerHit();
-        showCards();
-        break;
-    case 's':
-        dealerHit();
-        hideCard = false; // Player's turn is complete. Show dealer's hand.
-        showCards();
-        break;
-    default:
-        cout << "\nEnter a valid option.";
-        menu();
-        break;
-    }
-}
-
 void BlackJack::playerHit()
 {
     player.pushCard(deck.popCard());
@@ -109,6 +115,20 @@ void BlackJack::dealerHit()
     if(dealer.getHandTotal() > 21) {
         cout << "Dealer busts!\n";
         playerWins();
+    }
+}
+
+void BlackJack::checkWin()
+{
+    if(player.getHandTotal() > dealer.getHandTotal()) {
+        playerWins();
+    }
+    else if(dealer.getHandTotal() > player.getHandTotal()) {
+        dealerWins();
+    }
+    else {
+        cout << "PUSH!";
+        newRound();
     }
 }
 

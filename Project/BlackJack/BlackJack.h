@@ -27,6 +27,7 @@ private:
     void showCards(); // Display cards.
     void menu();      // Shows blackjack options menu.
     void newRound();  // Start new round.
+    void checkWin();
     void playerWins();
     void dealerWins();
     void exitGame() { exit(0); }  // Game ends when player places a bet of 0.
