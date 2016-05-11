@@ -5,7 +5,6 @@
 #include "Deck.h"
 #include "ClearScreen.h"
 
-#include <stdlib.h>
 #include <iostream>
 #include <iomanip>
 #include <set>

@@ -1,7 +1,5 @@
 #include "Deck.h"
 
-using std::vector;
-
 void Deck::shuffle()
 {
     //emptyDeck(); // Empty the deck so new cards can be added.

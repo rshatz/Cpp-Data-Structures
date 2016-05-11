@@ -107,13 +107,20 @@ void BlackJack::takeBet()
     cin >> bet;
     cout << "\n";
 
-    auto check = chips.find(bet);
-    // Loop if invalid bet is made
-    while(check == chips.end()) {
-        cout << "  Enter a valid chip value: ";
+    while(std::cin.fail()) {
+        cout << "Enter a valid bet: ";
+        std::cin.clear();
+        std::cin.ignore(256,'\n');
         cin >> bet;
-        check = chips.find(bet);
     }
+
+//    auto check = chips.find(bet);
+//    // Loop if invalid bet is made
+//    while(check == chips.end()) {
+//        cout << "  Enter a valid chip value: ";
+//        cin >> bet;
+//        check = chips.find(bet);
+//    }
     player.placeBet(bet);
 }
 
