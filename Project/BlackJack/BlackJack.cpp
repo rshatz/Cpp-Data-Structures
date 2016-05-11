@@ -113,6 +113,11 @@ void BlackJack::takeBet()
         std::cin.ignore(256,'\n');
         cin >> bet;
     }
+    while(bet > player.getBalance()) {
+        cout << "You do not have sufficient funds to cover that bet."
+             << "Please enter a valid bet: ";
+        cin >> bet;
+    }
 
 //    auto check = chips.find(bet);
 //    // Loop if invalid bet is made
