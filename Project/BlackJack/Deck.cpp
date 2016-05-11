@@ -2,7 +2,7 @@
 
 void Deck::shuffle()
 {
-    //emptyDeck(); // Empty the deck so new cards can be added.
+    emptyDeck(); // Empty the deck so new cards can be added.
     vector<string> vect;
 
     set<string>::const_iterator iset;
@@ -34,5 +34,4 @@ void Deck::emptyDeck() {
     while(!(deck.empty())) {
         deck.pop();
     }
-    shuffle();
 }

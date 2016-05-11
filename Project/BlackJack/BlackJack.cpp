@@ -148,7 +148,7 @@ void BlackJack::showCards()
         dealer.hideCard();
     }
     else {
-        cout << "- " << setw(2) << dealer.getHandTotal() << "-";
+        cout << "-" << setw(2) << dealer.getHandTotal() << "- ";
         dealer.showHand();
     }
     cout << "\n  _____________________________________________________\n\n";

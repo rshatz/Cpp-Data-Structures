@@ -16,8 +16,7 @@ class Deck
 {
 public:
 
-    Deck() { shuffle(); }
-
+    Deck();
     void shuffle();    // Creates new deck and shuffles it.
     string& popCard(); // Removes first card off deck.
 
