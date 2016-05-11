@@ -96,28 +96,32 @@ void BlackJack::takeBet()
     cout << "=======================================================\n"
          << "  Chip values: ";
     set<int>::const_iterator iter;
-    for (iter = chips.begin(); iter != chips.end(); iter++) {
-        cout << " $" << *iter << " ";
-    }
+//    for (iter = chips.begin(); iter != chips.end(); iter++) {
+//        cout << " $" << *iter << " ";
+//    }
 
     cout << "\n\n  Your Account: $" << player.getBalance() << ".\n"
          << "  Place your bet: $";
 
-    int bet;
+    string bet;
     cin >> bet;
-    cout << "\n";
 
-    while(std::cin.fail()) {
-        cout << "Enter a valid bet: ";
-        std::cin.clear();
-        std::cin.ignore(256,'\n');
+    while(!validateBet(bet)) {
         cin >> bet;
     }
-    while(bet > player.getBalance()) {
-        cout << "You do not have sufficient funds to cover that bet."
-             << "Please enter a valid bet: ";
-        cin >> bet;
-    }
+    player.placeBet(stoi(bet));
+
+//    while(std::cin.fail()) {
+//        cout << "Enter a valid bet: ";
+//        std::cin.clear();
+//        std::cin.ignore(256,'\n');
+//        cin >> bet;
+//    }
+//    while(bet > player.getBalance()) {
+//        cout << "You do not have sufficient funds to cover that bet."
+//             << "Please enter a valid bet: ";
+//        cin >> bet;
+//    }
 
 //    auto check = chips.find(bet);
 //    // Loop if invalid bet is made
@@ -126,7 +130,24 @@ void BlackJack::takeBet()
 //        cin >> bet;
 //        check = chips.find(bet);
 //    }
-    player.placeBet(bet);
+}
+
+bool BlackJack::validateBet(const string bet)
+{
+    bool is_digit = std::all_of(bet.begin(), bet.end(), ::isdigit);
+
+    while(!is_digit || stoi(bet) > player.getBalance()) {
+        if(!is_digit) {
+            cout << "Enter a numerical bet: $";
+            return false;
+        }
+        else {
+            cout << "You do not have sufficient funds to cover that bet.\n"
+                 << "Enter a valid bet: $";
+            return false;
+        }
+    }
+    return true;
 }
 
 void BlackJack::dealCards()

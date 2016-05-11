@@ -22,21 +22,21 @@ public:
 
 private:
 
-    void takeBet();   // Take bets at beging of each round.
-    void dealCards(); // Deals two cards for each player at begining of each round.
-    void playerHit(); // Add a card to a player's hand.
-    void dealerHit(); // Add a card to the dealer's hand.
-    void showCards(); // Display cards.
-    void menu();      // Shows blackjack options menu.
-    void newRound();  // Current round terminates. Start new round.
-    void checkWin();  // Check to see which player has higher value hand
-    void newDeal();   // Ask player if quit or continue game.
-    //void checkBust(); // Check if a player goes over 21.
-    void playerWins();
-    void dealerWins();
+    void takeBet();     // Take bets at beging of each round.
+    void dealCards();   // Deals two cards for each player at begining of each round.
+    void playerHit();   // Add a card to a player's hand.
+    void dealerHit();   // Add a card to the dealer's hand.
+    void showCards();   // Display cards.
+    void menu();        // Shows blackjack options menu.
+    void newRound();    // Current round terminates. Start new round.
+    void checkWin();    // Check to see which player has higher value hand
+    void newDeal();     // Ask player if quit or continue game.
+    void playerWins();  // Declares player as winner.
+    void dealerWins();  // Declares dealer as winner.
     void exitGame() { exit(0); }  // Game ends when player places a bet of 0.
+    bool validateBet(const string bet); // Validates user input for bet value.
 
-    set<int> chips = { 10, 20, 50, 100, 250, 500, 1000 };
+    //set<int> chips = { 10, 20, 50, 100, 250, 500, 1000 };
 
     Player player;
     Player dealer;
