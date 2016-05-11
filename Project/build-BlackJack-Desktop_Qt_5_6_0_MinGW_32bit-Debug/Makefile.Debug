@@ -118,7 +118,8 @@ compiler_clean:
 
 debug/main.o: ../BlackJack/main.cpp ../BlackJack/BlackJack.h \
 		../BlackJack/Player.h \
-		../BlackJack/Deck.h
+		../BlackJack/Deck.h \
+		../BlackJack/ClearScreen.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\main.o ..\BlackJack\main.cpp
 
 debug/Player.o: ../BlackJack/Player.cpp ../BlackJack/Player.h
@@ -129,7 +130,8 @@ debug/Deck.o: ../BlackJack/Deck.cpp ../BlackJack/Deck.h
 
 debug/BlackJack.o: ../BlackJack/BlackJack.cpp ../BlackJack/BlackJack.h \
 		../BlackJack/Player.h \
-		../BlackJack/Deck.h
+		../BlackJack/Deck.h \
+		../BlackJack/ClearScreen.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\BlackJack.o ..\BlackJack\BlackJack.cpp
 
 debug/ClearScreen.o: ../BlackJack/ClearScreen.cpp ../BlackJack/ClearScreen.h

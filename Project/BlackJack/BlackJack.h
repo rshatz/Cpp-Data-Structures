@@ -36,15 +36,13 @@ private:
     void exitGame() { exit(0); }  // Game ends when player places a bet of 0.
     bool validateBet(const string bet); // Validates user input for bet value.
 
-    //set<int> chips = { 10, 20, 50, 100, 250, 500, 1000 };
-
     Player player;
     Player dealer;
 
     Deck deck;
 
     bool hideCard; // Test to see if dealer's 2nd card should be hidden.
-    bool control;
+    bool control;  // Control if menu() function is called again.
 };
 
 #endif // BLACKJACK_H

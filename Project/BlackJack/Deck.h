@@ -42,8 +42,6 @@ private:
                         ,"6C", "7C", "8C", "9C", "10C"
                         ,"JC", "QC", "KC"};
 
-    //set<string> cards = {"AH", "KH"};
-
     queue<string> deck; // Store the deck of cards.
 };
 

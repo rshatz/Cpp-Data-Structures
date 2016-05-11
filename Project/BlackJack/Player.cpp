@@ -19,7 +19,7 @@ void Player::tallyHand(const string card)
 
     while(aceCount && handTotal > 21) {
         handTotal -= 10; // Ace now is equal to 1.
-        aceCount--; // Ace value logically can only change once.
+        --aceCount;
     }
 }
 

@@ -14,7 +14,6 @@ void BlackJack::newRound()
     dealCards();
     showCards();
 
-    control = true;
     while(control) {
         menu();
     }
@@ -30,14 +29,14 @@ void BlackJack::newDeal()
     hideCard = true;
 
     if(!player.getBalance()) {
-        cout << "Sorry you are out of funds. Game Over\n";
+        cout << "Sorry you are out of funds. Game Over.\n";
         exitGame();
     }
 
-    cout << " *********************************\n"
-         << " *  d key = deal | q key = quit  *\n"
-         << " *********************************\n"
-         << " Enter: ";
+    cout << "           *********************************\n"
+         << "           *  d key = deal | q key = quit  *\n"
+         << "           *********************************\n"
+         << "           Enter: ";
 
     char input;
     cin >> input;
@@ -49,6 +48,7 @@ void BlackJack::newDeal()
     }
     if(tolower(input) == 'd') {
         ClearScreen();
+        control = true; // Run menu() again.
         newRound();
     }
     else {
@@ -58,10 +58,10 @@ void BlackJack::newDeal()
 
 void BlackJack::menu()
 {
-    cout << " ********************************\n"
-         << " *  h key = hit | s key = stay  *\n"
-         << " ********************************\n"
-         << " Enter: ";
+    cout << "           ********************************\n"
+         << "           *  h key = hit | s key = stay  *\n"
+         << "           ********************************\n"
+         << "           Enter: ";
 
     char choice;
     cin >> choice;
@@ -93,15 +93,11 @@ void BlackJack::menu()
 
 void BlackJack::takeBet()
 {
-    cout << "=======================================================\n"
-         << "  Chip values: ";
-    set<int>::const_iterator iter;
-//    for (iter = chips.begin(); iter != chips.end(); iter++) {
-//        cout << " $" << *iter << " ";
-//    }
-
-    cout << "\n\n  Your Account: $" << player.getBalance() << ".\n"
-         << "  Place your bet: $";
+    cout << "  -----------------------------------------------------\n"
+         << "  |                 $$$ BLACKJACK $$$                 |\n"
+         << "  -----------------------------------------------------\n\n"
+         << "       Your Account:   $" << player.getBalance() << ".\n"
+         << "       Place your bet: $";
 
     string bet;
     cin >> bet;
@@ -110,26 +106,6 @@ void BlackJack::takeBet()
         cin >> bet;
     }
     player.placeBet(stoi(bet));
-
-//    while(std::cin.fail()) {
-//        cout << "Enter a valid bet: ";
-//        std::cin.clear();
-//        std::cin.ignore(256,'\n');
-//        cin >> bet;
-//    }
-//    while(bet > player.getBalance()) {
-//        cout << "You do not have sufficient funds to cover that bet."
-//             << "Please enter a valid bet: ";
-//        cin >> bet;
-//    }
-
-//    auto check = chips.find(bet);
-//    // Loop if invalid bet is made
-//    while(check == chips.end()) {
-//        cout << "  Enter a valid chip value: ";
-//        cin >> bet;
-//        check = chips.find(bet);
-//    }
 }
 
 bool BlackJack::validateBet(const string bet)
@@ -138,12 +114,12 @@ bool BlackJack::validateBet(const string bet)
 
     while(!is_digit || stoi(bet) > player.getBalance()) {
         if(!is_digit) {
-            cout << "Enter a numerical bet: $";
+            cout << "       Enter a numerical bet: $";
             return false;
         }
         else {
-            cout << "You do not have sufficient funds to cover that bet.\n"
-                 << "Enter a valid bet: $";
+            cout << "       You do not have sufficient funds to cover that bet.\n"
+                 << "       Enter a valid bet: $";
             return false;
         }
     }
@@ -161,20 +137,21 @@ void BlackJack::dealCards()
 
 void BlackJack::showCards()
 {
-    cout << "  Player's Hand: "
+    cout << "\n  _____________________________________________________\n\n";
+    cout << "           Player's Hand: "
          << "-" << setw(2) << player.getHandTotal() << "- ";
     player.showHand();
 
-    cout << "\n  Dealer's Hand: ";
+    cout << "\n           Dealer's Hand: ";
     if(hideCard) {
         cout << "-??- ";
-        dealer.hideCard();   
+        dealer.hideCard();
     }
     else {
-        cout << "-" << setw(2) << dealer.getHandTotal() << "- ";
+        cout << "- " << setw(2) << dealer.getHandTotal() << "-";
         dealer.showHand();
     }
-    cout << "\n\n";
+    cout << "\n  _____________________________________________________\n\n";
 }
 
 void BlackJack::playerHit()
@@ -182,7 +159,7 @@ void BlackJack::playerHit()
     player.pushCard(deck.popCard());
 
     if(player.getHandTotal() > 21) {
-        cout << "\n  Player bust! ";
+        cout << "\n     Player bust! ";
         dealerWins();
     }
 }
@@ -193,7 +170,7 @@ void BlackJack::dealerHit()
         dealer.pushCard(deck.popCard());
     }
     if(dealer.getHandTotal() > 21) {
-        cout << "\n  Dealer bust! ";
+        cout << "\n     Dealer bust! ";
         playerWins();
     }
 }
@@ -207,14 +184,15 @@ void BlackJack::checkWin()
         dealerWins();
     }
     else {
-        cout << "  PUSH!\n\n";
+        cout << "       PUSH!\n\n";
+        showCards();
         newDeal();
     }
 }
 
 void BlackJack::playerWins()
 {
-    cout << "  Player wins!\n";
+    cout << "       Player wins!\n";
     hideCard = false;
     showCards();
     player.win();
@@ -223,7 +201,7 @@ void BlackJack::playerWins()
 
 void BlackJack::dealerWins()
 {
-    cout << "  Dealer wins.\n";
+    cout << "       Dealer wins.\n";
     hideCard = false;
     showCards();
     player.lose();
