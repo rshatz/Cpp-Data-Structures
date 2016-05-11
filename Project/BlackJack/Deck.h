@@ -24,7 +24,7 @@ private:
 
     void emptyDeck(); // Empty the deck so new cards can be added
 
-    set<string> cards = {  // Hearts
+    const set<string> cards = {  // Hearts
                          "AH", "2H", "3H", "4H", "5H"
                         ,"6H", "7H", "8H", "9H", "10H"
                         ,"JH", "QH", "KH"
